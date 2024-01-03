@@ -1,6 +1,6 @@
 {% load static %}
 {% load bootstrap_icons %}
-<form method="get" name="search" id="searchForm" action="{% url 'search' %}">
+<form method="get" name="search" id="searchForm" action="https://www.lookupprice.com{% url 'search' %}">
     <div class="form-group has-search">
         {% bs_icon 'search' extra_classes='form-control-feedback' %}
         <input type="text" name="query" id="id_query" class="form-control search-form" placeholder="Search" style="border-radius: 20px;color:#448c74;">
