@@ -17,12 +17,6 @@ Including another URLconf
 
 from django.urls import path
 from lookupAgencyApp import views
-from .sitemaps import PostsSitemap, PagesSitemap
-
-sitemaps = {
-    'blogposts': PostsSitemap,
-    'categories': PagesSitemap,
-}
 
 urlpatterns = [
     path('', views.index, name='index'),

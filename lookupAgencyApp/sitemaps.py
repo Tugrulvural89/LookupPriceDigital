@@ -1,6 +1,8 @@
 # myapp/sitemaps.py
 
 from django.contrib.sitemaps import Sitemap
+from django.urls import reverse
+
 from .models import Post, StaticPages
 
 
@@ -24,3 +26,15 @@ class PagesSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.updated
+
+
+class StaticViewSitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 0.9
+
+    def items(self):
+        return ['index', 'contact', 'blog', 'case', 'search']
+
+    def location(self, item):
+        return reverse(item)
+
