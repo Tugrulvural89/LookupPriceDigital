@@ -76,11 +76,14 @@ def case_detail(request, slug=None, *args, **kwargs):
 
 def search(request):
     post_query = request.GET.get('query')
-    if len(post_query) > 3:
-        posts = Post.objects.filter(title__icontains=post_query, is_published=True).order_by('-created')
-        paginator = Paginator(posts, 10)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
+    if post_query is not None:
+        if len(post_query) > 3:
+            posts = Post.objects.filter(title__icontains=post_query, is_published=True).order_by('-created')
+            paginator = Paginator(posts, 10)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+        else:
+            page_obj = []
     else:
         page_obj = []
     return render(request, 'search_result.html', {'posts': page_obj, 'query': post_query})

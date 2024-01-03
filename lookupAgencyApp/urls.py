@@ -25,7 +25,7 @@ urlpatterns = [
     path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('case/', views.case, name='case'),
     path('case/<slug:slug>/', views.case_detail, name='case_detail'),
-    path('<slug:slug>/', views.static_pages, name='static_pages'),
     path('search/', views.search, name='search'),
+    path('<slug:slug>/', views.static_pages, name='static_pages'),
     path('tag/<slug:tag_slug>/', views.posts_by_tag, name='posts_by_tag'),
 ]
