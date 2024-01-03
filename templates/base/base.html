@@ -1,0 +1,499 @@
+{% load bootstrap_icons %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title  %} main page {% endblock title %}</title>
+    <meta name="description" content="{% block metadata %}Bu sayfa, ses dosyalarının nasıl oynatılacağını ve yönetileceğini gösterir. {% endblock metadata %}">
+    <!-- Bootstrap CSS -->
+      {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Recommended favicon format -->
+    <link rel="icon" type="image/png" href="{% static 'logos/mylogo.png' %}">
+    <style>
+.rounded-20 {
+    border-radius:20px
+}
+.text-body-secondary {
+    color: #858c97;
+}
+        .g-icon {
+            color: green!important;
+        }
+        h1, h2, h3, h4, h5, h6 ,li {
+            color: #ffffff !important;
+            text-decoration: none;
+        }
+        .y-snap {
+            border-radius: 20px;
+            margin-top: 15px;
+            padding: 0.5em 1.5em 0.5em 1.5em;
+            background-color: #574e33;
+            color: #edcb50;
+            margin-bottom: 10px;
+        }
+        .font-weight-bold {
+            font-weight: bold!important;
+        }
+        .padding-button {
+            padding: 16px 32px 16px 32px;
+        }
+        li {
+            margin-top:5px;
+        }
+        #mainimagebelow {
+            animation-name: spin;
+            animation-duration: 35000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            }
+        #mainimage {
+            animation-name: spin;
+            animation-duration: 35000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        #mainimagesec {
+            animation-name: spin;
+            animation-duration: 45000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes spin {
+            from {
+                transform:  rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+        #moving-icon {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            color: red;
+            font-size: 24px;
+            z-index: 1000;
+            transition: all 0.3s ease; /* Yumuşak bir geçiş sağlar */
+        }
+        #moving-icon2 {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: red;
+            font-size: 24px;
+            z-index: 1000;
+            transition: all 0.3s ease; /* Yumuşak bir geçiş sağlar */
+        }
+        #moving-icon3 {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: red;
+            font-size: 24px;
+            transition: all 0.3s ease; /* Yumuşak bir geçiş sağlar */
+            z-index: 1000;
+        }
+        #herobg {
+            position: absolute;
+            top: 0;
+            left: 21px;
+            margin: auto;
+        }
+        #mainimagesec {
+            top: 0;
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            left: 19%;
+        }
+
+        @media only screen and (max-width:600px) {
+            #moving-icon3, #moving-icon, #moving-icon2 {
+                width: 400px !important;
+                height: 400px !important;
+            }
+            .margin-below {
+                margin-top: 20px!important;
+            }
+            #mainimagesec {
+            top: 0;
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            left: 19%;
+        }
+            .mt-sm-3 {
+                margin-top: 30px;
+            }
+            #moving-icon {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            color: red;
+            font-size: 24px;
+            z-index: 1000;
+            transition: all 0.3s ease; /* Yumuşak bir geçiş sağlar */
+        }
+        #moving-icon2 {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: red;
+            font-size: 24px;
+            z-index: 1000;
+            transition: all 0.3s ease; /* Yumuşak bir geçiş sağlar */
+        }
+        #moving-icon3 {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: red;
+            font-size: 24px;
+            transition: all 0.3s ease; /* Yumuşak bir geçiş sağlar */
+            z-index: 1000;
+        }
+
+            #mainimagesec {
+            top: 17%;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 19%;
+            }
+            #herobg {
+            height: 400px!important;
+            width: 400px!important;
+            }
+            #herobg {
+                left: 10px;
+            }
+            #mainimagebelow {
+               height: 300px!important;
+                width: 300px!important;
+            }
+            #mainimage {
+               height: 400px!important;
+                width: 400px!important;
+            }
+
+        }
+        @media only screen and (min-width:601px) {
+             #navbarNav {
+                display: none!important;
+            }
+            #herobg, #mainimage {
+            height: 500px;
+            width: 500px;
+            }
+            #moving-icon3, #moving-icon, #moving-icon2 {
+                width: 100% !important;
+            }
+
+        }
+
+        .bg-gray {
+            background-color: #f6f6f6;
+        }
+        .text-black {
+            color: #000000;
+        }
+        .section-image {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            }
+           .btn-main-button {
+          background-color: #448c74;
+      }
+           .btn-main-button-light{
+               background-color: #568a751a !important;
+           }
+           .bg-primary {
+                background-color: #568a751a !important;
+           }
+           .text-primary {
+               color: #448c74 !important;
+
+           }
+           .text-primary:hover {
+               color: #ffffff !important;
+           }
+.text-white {
+    color: #ffffff !important;
+}
+
+.myCard {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.left-anim-col {
+  transform: translateX(-100%);
+}
+
+.right-anim-col {
+  transform: translateX(100%);
+}
+
+.animate {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 1s ease;
+}
+.bg-gray-500 {
+    background-color: #f9f9ff;
+}
+
+.card-slider-text {
+  font-weight: 300;
+    font-size: 23px;
+    line-height: 45px;
+}
+.card-slider-subtext {
+    font-weight: 300;
+    font-size: 20px;
+}
+.card-slider-subaltern {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.bg-green {
+    background-color: #018615;
+}
+.bg-white {
+    background-color: white;
+}
+
+.card-flip {
+    background-color: transparent;
+    height: 350px;
+    border: none;
+}
+
+.card-flip-inner {
+    border-radius: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+
+
+.card-flip:hover .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+
+
+.card-flip-front, .card-flip-back {
+    border-radius: 20px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+
+.card-flip-back {
+  transform: rotateY(180deg);
+}
+
+@media  only screen and (min-width: 768px) {
+                    #spinners {
+                        background-image: url('/images/daire.png');
+                        justify-content: center;
+                        text-align: center;
+                    }
+                    .below-logo {
+                        width: 70px;
+                        height: 70px;
+                    }
+                }
+                @media only screen and (max-width:600px) {
+                    #spinners {
+                        background-image: url('/images/daire.png');
+                    }
+                    .below-logo {
+                        width: 70px;
+                        height: 70px;
+                    }
+                }
+
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+    horiz-align: center;
+    padding-left: 2.375rem;
+    justify-content: center;
+}
+
+.text-black-with-opacity-20 {
+    color: rgba(18, 21, 25, 0.8);
+}
+.no-underline {
+    text-decoration: none;
+}
+
+.has-search .form-control-feedback {
+    margin: 19px;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    text-align: center;
+    horiz-align: center;
+    line-height: 2.375rem;
+    pointer-events: none;
+    color: #aaa;
+}
+.search-form {
+    padding: .825rem 1rem;
+}
+
+a {
+    transition: color .2s ease-in-out;
+}
+a:hover {
+    color: #448c74;
+}
+.text-soft-black {
+    color: #576071;
+}
+.form-control::-moz-placeholder {
+    color: rgba(27, 27, 27, 0.5);
+    opacity:0.8;
+}
+
+.form-control::placeholder {
+    color: rgba(27, 27, 27, 0.5);
+    opacity:0.8;
+}
+    </style>
+
+
+</head>
+<body>
+{% block navbar %}
+  {% include "base/navbar.html" %}
+{% endblock %}
+
+{% block content %}
+{% endblock content %}
+
+<footer class="footer bg-dark py-5 mt-5">
+      <div class="container pt-md-2 pt-lg-3 pt-xl-4">
+        <div class="row pb-5 pt-sm-2 mb-lg-2">
+          <div class="col-md-4 col-lg-3 pb-2 pb-md-0 mb-4 mb-md-0">
+            <a class="navbar-brand py-0 mb-3 mb-md-4" href=/">
+              <span class="text-primary flex-shrink-0 me-2">
+                <img src="{% static 'logos/mylogo.png' %}" style="width: 10%;"  alt="lookup Price Digital Agency Logo"/>
+              </span>
+              <span class="text-white opacity-90">Lookup Price Digital</span>
+            </a>
+            <p class="text-body fs-sm pb-2 pb-md-3 mt-3 mb-3 text-white">Innovating the Future of Digital Marketing.
+                Committed to delivering excellence in software development, advertising, and creative design</p>
+            <div class="d-flex gap-3">
+              <a target="_blank" class="btn btn-icon btn-sm btn-secondary btn-facebook" href="https://www.facebook.com/lookupdigitalmedia/" aria-label="Facebook">
+                  {% bs_icon 'facebook' %}
+              </a>
+              <a target="_blank" class="btn btn-icon btn-sm btn-secondary btn-instagram" href="https://www.instagram.com/lookupdigital/" aria-label="Instagram">
+                {% bs_icon 'instagram' %}
+              </a>
+              <a target="_blank" class="btn btn-icon btn-sm btn-secondary btn-linkedin" href="https://www.linkedin.com/in/kasim-tugrul-vural/" aria-label="LinkedIn">
+                {% bs_icon 'linkedin' %}
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3 col-lg-3 pb-2 pb-md-0 mb-4 mb-md-0 text-center">
+            <div class="col mb-4 mb-md-0">
+                <h4 class="h6 fw-bold pb-lg-1 text-center">Pages</h4>
+                <ul class="nav flex-column text-center">
+                  <li><a class="nav-link fw-normal py-1 px-0" href="{% url 'blog' %}">Blog</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="{% url 'case' %}">Case</a></li>
+                  <li><a class="nav-link fw-normal py-1 px-0" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-md-3 col-lg-3 pb-2 pb-md-0 mb-4 mb-md-0 text-center">
+              <div class="col mb-4 mb-md-0">
+                <h4 class="h6 fw-bold pb-lg-1 text-center">Articles</h4>
+                <ul class="nav flex-column  text-center">
+                    {% for item in blog_content %}
+                  <li>
+                    <a class="nav-link fw-normal py-1 px-0  text-center" href="{% url 'blog_detail' slug=item.slug %}">
+                             {{ item.title|truncatechars_html:20 }}
+                    </a>
+                  </li>
+                    {% endfor %}
+                </ul>
+              </div>
+          </div>
+          <div class="col-md-3 col-lg-3 pb-2 pb-md-0 mb-4 mb-md-0">
+              <div class="col">
+                <h4 class="h6 fw-bold pb-2 mb-1 mb-lg-1 text-center">Discover Our Apps</h4>
+                  <p class="mt-2 text-center">Nourish Cuisine Chef AI</p>
+                <a class="btn btn-secondary px-3 py-2 mx-auto" href="https://apps.apple.com/tr/app/nourish-cuisine/id6450790012" target="_blank">
+                  {% bs_icon 'apple' %}
+                </a>
+                <a class="btn btn-secondary px-3 py-2 mx-auto" href="https://play.google.com/store/apps/details?id=com.kasimtugrulvural.yemek">
+                   {% bs_icon 'google' %}
+                </a>
+                   <p class="mt-2 text-center">Buy Caravan in Europe</p>
+                <a class="btn btn-secondary px-3 py-2 mx-auto" href="//avrupadakaravan.com" target="_blank">
+                  {% bs_icon 'browser-chrome' %}
+                </a>
+                   <p class="mt-2 text-center">Work in Europe</p>
+                <a class="btn btn-secondary px-3 py-2 mx-auto" href="//avrupadaisinolsun.com" target="_blank">
+                  {% bs_icon 'browser-chrome' %}
+                </a>
+              </div>
+          </div>
+
+        </div>
+        <p class="nav fs-sm mb-0">
+           <span class="text-body-secondary">© All rights reserved. Made by  <span style="color: red;">♥</span></span>
+        </p>
+      </div>
+    </footer>
+<script>
+    document.addEventListener('scroll', function() {
+  const cards = document.querySelectorAll('.myCard');
+  const triggerBottom = window.innerHeight / 5 * 4; // Adjust as needed
+
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+
+    if(cardTop < triggerBottom) {
+      card.classList.add('animate');
+    } else {
+      card.classList.remove('animate');
+    }
+  });
+});
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,610 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block title %} Blog Page {% endblock title %}
+{% block metadata %} Bu sayfa blog detay sayfasıdır {% endblock metadata %}
+
+{% block content %}
+     <script>
+        document.addEventListener('scroll', function() {
+    var icon = document.getElementById('moving-icon');
+    var icon2 = document.getElementById('moving-icon2');
+    var icon3 = document.getElementById('moving-icon3');
+    var scrollY = window.scrollY || document.documentElement.scrollTop;
+
+    if (scrollY < 100) {
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon.style.right = '-30px';
+        icon.style.top = '5px';
+
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon2.style.top = '20px';
+        icon2.style.left = '20px';
+
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon3.style.top = '10px';
+        icon3.style.left = '20px';
+    } else if (scrollY < 200) {
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon.style.left = '10px';
+        icon.style.top = '20px';
+
+         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon2.style.top = '30px';
+        icon2.style.left = '5px';
+
+
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon3.style.top = '10px';
+        icon3.style.left = '30px';
+
+    } else {
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon.style.right = '-45';
+        icon.style.top = '5px';
+
+          // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon2.style.top = '15px';
+        icon2.style.left = '10px';
+
+        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+        icon3.style.top = '20px';
+        icon3.style.left = '10px';
+    }
+});
+
+    </script>
+    <div class="bg-dark">
+        <div class="row justify-content-center items-center p-5">
+            <div class="col-12 col-md-4">
+                <span class="y-snap">Discover Your Digital Dreams with Us!  🚀</span>
+                <h1 class="font-weight-bold display-2 mt-5">Transforming Ideas into Digital Realities</h1>
+                <ul class="list-unstyled">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-check2-all g-icon" viewBox="0 0 16 16">
+                          <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"></path>
+                          <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"></path>
+                        </svg> &nbsp;&nbsp;Creative and groundbreaking software solutions that transform your industry.
+                    </li>
+                    <li>
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-check2-all g-icon" viewBox="0 0 16 16">
+                          <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"></path>
+                          <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"/>
+                        </svg> &nbsp;&nbsp;Elevate your brand with targeted advertising campaigns that reach your audience.
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-check2-all g-icon" viewBox="0 0 16 16">
+                          <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"></path>
+                          <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"/>
+                        </svg> &nbsp;&nbsp;Engaging and memorable web designs that prioritize user experience.
+                    </li>
+                </ul>
+                <a href="{% url 'contact' %}" class="btn btn-main-button text-white padding-button px-3 rounded-pill mt-5">Let's Bring Your Projects to Life</a>
+
+            </div>
+
+            <div class="col-12 col-md-4 mt-sm-3">
+                <div class="p-xs-2 p-sm-2" style="position: relative;">
+                <img id="mainimage" src="{% static 'images/daire.png' %}"  alt="" />
+                 <img src="{% static 'images/05.png' %}"  alt="" id="moving-icon"/>
+                <img src="{% static 'images/03.png' %}"  alt="" id="moving-icon2"/>
+                <img src="{% static 'images/04.png' %}"  alt="" id="moving-icon3"/>
+                <img src="{% static 'images/herobg.png' %}"  alt="" id="herobg"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-3 row-cols-sm-4 row-cols-lg-5 row-cols-xl-6 justify-content-center align-items-center g-4 pt-lg-5 pt-xl-4  p-5 p-xs-5 p-sm-5 gap-2">
+            <div class="col col-12">
+              <img class="d-block my-1 mx-auto" src="{% static 'logos/2.png' %}" width="70%" alt="Foster">
+            </div>
+            <div class="col col-12">
+              <img class="d-block my-1 mx-auto" src="{% static 'logos/5.png' %}" width="70%" alt="Foster">
+            </div>
+            <div class="col col-12">
+              <img class="d-block my-1 mx-auto" src="{% static 'logos/8.png' %}" width="70%" alt="Foster">
+            </div>
+            <div class="col col-12">
+              <img class="d-block my-1 mx-auto" src="{% static 'logos/16.png' %}" width="70%" alt="Foster">
+            </div>
+            <div class="col col-12">
+              <img class="d-block my-1 mx-auto" src="{% static 'logos/17.png' %}" width="70%" alt="Foster">
+            </div>
+            <div class="col col-12">
+              <img class="d-block my-1 mx-auto" src="{% static 'logos/21.png' %}" width="70%" alt="Foster">
+            </div>
+          </div>
+    </div>
+<section class="bg-gray py-5 text-black">
+    <div class="container mt-1 py-md-2 py-lg-4 py-xxl-5">
+          <h2 class="h1 text-center pt-1 pt-sm-4 text-black">Unlocking New Horizons in Digital Advertising</h2>
+          <p class="text-center mx-auto pb-3 mb-3 mb-lg-4 text-secondary" style="max-width: 480px;">Dive into a World Where Data, Creativity, and Strategy Converge</p>
+          <div class="row g-4 pb-2 pb-sm-4 mb-sm-2">
+
+            <!-- Item -->
+            <div class="col-md-5">
+              <div class="card border-0 h-100">
+                <div class="card-body">
+                  <a href="{% url 'blog' %}">
+                    <img class="section-image" src="{% static 'images/section/01-light.png' %}" alt="Image">
+                  </a>
+                  <div class="pt-3 mt-2 mt-lg-3">
+                    <h3 class="text-black">Tailored Advertising Opportunities</h3>
+                    <p class="mb-0 text-secondary">Discover bespoke advertising solutions crafted to meet your unique
+                        brand needs. Experience targeted campaigns that resonate with your audience and maximize engagement.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col-md-7">
+              <div class="card border-0 h-100">
+                <div class="card-body overflow-hidden">
+                  <div class="d-sm-flex align-items-center">
+                    <a class="d-block order-sm-2 flex-shrink-0 mt-n4 mb-n2" href="{% url 'case' %}">
+                      <img class="section-image" src="{% static 'images/section/02.png' %}" alt="Image" width="308">
+                    </a>
+                    <div class="order-sm-1 pe-sm-3 me-xl-4">
+                      <h3 class="text-black">Collaborative Teamwork & Reporting</h3>
+                      <p class="pb-3 mb-1 mb-xl-3 text-secondary">Our team works closely with you, ensuring seamless
+                          communication and regular updates. Get comprehensive reports that give you a clear picture
+                          of your campaign's progress and success.</p>
+                      <a class="btn p-0 text-success" href="{% url 'case' %}">
+                        Learn more
+                        {% bs_icon 'arrow-right' %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col-md-7">
+              <div class="card border-0 h-100">
+                <div class="card-body overflow-hidden">
+                  <div class="d-sm-flex align-items-center">
+                    <a class="d-block order-sm-2 flex-shrink-0 mt-n4 mb-n2" href="{% url 'case' %}">
+                      <img class="section-image" src="{% static 'images/section/03-light.png' %}" alt="Image" width="308">
+                    </a>
+                    <div class="order-sm-1 pe-sm-3 me-xl-4">
+                      <h3 class=" text-black">Performance Metrics and KPIs</h3>
+                      <p class="pb-3 mb-1 mb-xl-3 text-secondary">Navigate the success of your campaigns with precise
+                          performance indicators. We provide detailed insights into customer behaviors and campaign
+                          effectiveness, driving informed decision-making.</p>
+                      <a class="btn p-0 text-success" href="{% url 'case' %}">
+                        Learn more
+                        {% bs_icon 'arrow-right' %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col-md-5">
+              <div class="card border-0 h-100">
+                <div class="card-body">
+                  <a href="#">
+                    <img class="section-image" src="{% static 'images/section/04-light.png' %}" alt="Image" width="420">
+                  </a>
+                  <div class="pt-3 mt-2 mt-lg-3">
+                    <h3 class="text-black">Maximized Revenue Growth</h3>
+                    <p class="mb-0 text-secondary">Leverage cutting-edge strategies to boost your revenue.
+                        Our data-driven approach focuses on optimizing your ROI, ensuring every investment
+                        contributes to your bottom line.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</section>
+
+<section class="overflow-hidden pt-5 mt-md-3 mt-lg-2 mt-xl-4 mt-xxl-5 text-black">
+        <div class="container pt-2 pt-sm-4 pt-lg-5">
+          <h2 class="h1 text-center pb-3 mb-3 mb-lg-4 text-black">How does ad tools work?</h2>
+          <!-- Step -->
+          <div class="row align-items-center position-relative pb-5 pb-lg-0 mb-1 mb-sm-2 mb-md-4 mb-lg-0">
+            <div class="myCard right-anim-col col-md-6 col-xl-5 offset-lg-1 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0 aos-init" data-aos="fade-left" data-aos-duration="500" data-aos-offset="250" data-disable-parallax-down="md">
+              <img class="d-dark-mode-none" src="{% static 'images/sectionhow/01-light.png' %}" width="100%"  alt="Image">
+            </div>
+            <div class="myCard left-anim-col col-md-6 col-lg-5 col-xl-4 offset-xl-1 order-md-1 aos-init" data-aos="fade-right" data-aos-duration="500" data-aos-offset="250" data-disable-parallax-down="md">
+              <div class="pe-md-4 pe-lg-0">
+                <span class="badge fs-sm bg-primary bg-opacity-10 text-primary mb-3 mb-lg-4 rounded-pill">Step 01</span>
+                <h3 class="h2 mb-3 mb-lg-4 text-black">Register & Integrate with Google and Facebook</h3>
+                <p class="pb-1 pb-lg-0 mb-4 mb-lg-5 text-secondary">Begin your journey by registering your brand on Google
+                    and Facebook. Our team will then seamlessly integrate these platforms with your website,
+                    setting the stage for you to see the revenue generated from your ads</p>
+                <a class="btn btn-outline-success rounded-pill text-primary" href="{% url 'blog' %}">Get Started with Integration</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="d-none d-lg-flex justify-content-center aos-init" data-aos="fade-in" data-aos-duration="500" data-aos-offset="250">
+            <svg class="d-block text-primary" width="339" height="365" viewBox="0 0 339 365" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: -150px; margin-top: -140px; margin-bottom: -108px;">
+              <path d="M324 291.371C120.111 291.37 240.756 58.7225 1.00032 73.2606" stroke="url(#arrow1)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 6"></path>
+              <path d="M337.375 290.62C338.074 290.998 338.074 292.001 337.375 292.379L328.476 297.196C327.81 297.557 327 297.074 327 296.317L327 286.683C327 285.925 327.81 285.443 328.476 285.803L337.375 290.62Z" fill="currentColor"></path>
+              <defs>
+                <linearGradient id="arrow1" x1="324" y1="291.5" x2="-2.99974" y2="72.4997" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="currentColor"></stop>
+                  <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Step -->
+          <div class="row align-items-center position-relative pb-5 pb-lg-0 mb-1 mb-sm-2 mb-md-4 mb-lg-0">
+            <div class="myCard right-anim-col col-md-6 col-xl-5 offset-xl-1 pb-2 pb-md-0 mb-4 mb-md-0 aos-init" data-aos="fade-right" data-aos-duration="500" data-aos-offset="250" data-disable-parallax-down="md">
+              <img class="d-dark-mode-none" src="{% static 'images/sectionhow/02-light.png' %}"  width="100%" alt="Image">
+            </div>
+            <div class="myCard left-anim-col col-md-6 col-lg-5 col-xl-4 offset-lg-1 aos-init" data-aos="fade-left" data-aos-duration="500" data-aos-offset="250" data-disable-parallax-down="md">
+              <div class="ps-md-4 ps-lg-0">
+                <span class="badge fs-sm bg-primary bg-opacity-10 text-primary rounded-pill mb-3 mb-lg-4">Step 02</span>
+                <h3 class="h2 mb-3 mb-lg-4 text-black">Optimize Your Ads for Maximum Impact</h3>
+                <p class="pb-1 pb-lg-0 mb-4 mb-lg-5 text-secondary">Dive into the art of ad optimization. We meticulously
+                    fine-tune your campaigns, focusing on aspects like negative keywords and audience
+                    targeting to ensure your ads reach their full potential.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="d-none d-lg-flex justify-content-center aos-init" data-aos="fade-in" data-aos-duration="500" data-aos-offset="250">
+            <svg class="d-block text-primary" width="263" height="275" viewBox="0 0 263 275" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top: -60px; margin-left: -120px; margin-bottom: -80px;">
+              <path d="M8.13678 249.647C7.47108 250.081 6.59001 249.602 6.59106 248.808L6.60444 238.689C6.60544 237.931 7.4158 237.45 8.08162 237.811L16.5478 242.408C17.2136 242.77 17.2512 243.712 16.6163 244.125L8.13678 249.647Z" fill="currentColor"></path>
+              <path d="M261.961 37.8891C216.908 65.6243 128.226 135.486 133.916 193.05C141.029 265.005 265.134 173.468 173.666 148.634C89.2542 125.715 30.9125 210.547 13.9796 236.702" stroke="url(#arrow2)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 6"></path>
+              <defs>
+                <linearGradient id="arrow2" x1="13.9797" y1="234.5" x2="276.704" y2="60.1939" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="currentColor"></stop>
+                  <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Step -->
+          <div class="row align-items-center position-relative">
+            <div class="myCard right-anim-col col-md-6 col-xl-5 offset-lg-1 order-md-2 d-md-flex justify-content-end pb-2 pb-md-0 mb-4 mb-md-0 aos-init" data-aos="fade-left" data-aos-duration="500" data-aos-offset="250" data-disable-parallax-down="md">
+              <img class="d-dark-mode-none" src="{% static 'images/sectionhow/03-light.png' %}" width="100%" alt="Image">
+            </div>
+            <div class="myCard left-anim-col col-md-6 col-lg-5 col-xl-4 offset-xl-1 order-md-1 aos-init" data-aos="fade-right" data-aos-duration="500" data-aos-offset="250" data-disable-parallax-down="md">
+              <div class="pe-md-4 pe-lg-0">
+                <span class="badge fs-sm bg-primary bg-opacity-10 text-primary mb-3 mb-lg-4 rounded-pill">Step 03</span>
+                <h3 class="h2 mb-3 mb-lg-4 text-black">In-Depth Reporting for Strategic Insights</h3>
+                <p class="pb-1 pb-lg-0 mb-4 mb-lg-5 text-secondary">Understanding your ad performance is crucial.
+                    We provide detailed daily and weekly reports, offering valuable insights and data-driven
+                    strategies to enhance your campaigns. These reports are crafted to give you a clear understanding
+                    of your ad's performance and areas for improvement.</p>
+                <a class="btn btn-outline-success rounded-pill text-primary" href="{% url 'blog' %}">Receive My Detailed Reports</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<section class="container pt-5 mt-md-3 mt-lg-2 mt-xl-4 mt-xxl-5">
+        <div class="row align-items-center mt-2 pt-2 pt-sm-4 pt-lg-5">
+          <!-- Testimonials -->
+          <div class="col-md-7 col-lg-6 mb-md-3">
+            <div class="card border-0 bg-gray-500 py-1 p-lg-4 shadow-sm" style="border-radius: 20px;">
+              <div class="card-body">
+                <div class="p-5">
+                  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <p class="text-black card-slider-text">
+                                "Working with Lookup Price Digital Agency revolutionized our digital approach.
+                                Not only did we see a remarkable increase in leads,
+                                but our cost per acquisition also dropped significantly. The team's expertise
+                                and tailored strategies made all the difference. A true game-changer for us!"
+                            </p>
+                             <div class="row mt-2">
+                                <div class="col-md-2">
+                                    <img src="{% static 'feedbacks/1.png' %}"  alt="" width="60" height="60" style="border-radius: 30px;"/>
+                                </div>
+                               <div class="col-md-10">
+                                   <div class="flex-column">
+                                       <p class="text-black card-slider-subtext mb-0">Levent Dicle</p>
+                                       <p class="text-black card-slider-subaltern">Eleman.net COO</p>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="text-black card-slider-text">
+                                "Our collaboration with Lookup Price Digital Agency brought a fresh influx of leads,
+                                specifically in our physical therapy department. Their targeted
+                                campaigns helped us reach potential clients we hadn’t
+                                tapped into before. The team's dedication and understanding of our
+                                specific needs were outstanding."
+                            </p>
+                           <div class="row mt-2">
+                                <div class="col-md-2">
+                                    <img src="{% static 'feedbacks/2.png' %}"  alt="" width="60" height="60" style="border-radius: 30px;"/>
+                                </div>
+                               <div class="col-md-10">
+                                   <div class="flex-column">
+                                       <p class="text-black card-slider-subtext mb-0">Prof. Dr. Engin Çakar</p>
+                                       <p class="text-black card-slider-subaltern">istanbulrehab.com</p>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="text-black card-slider-text">
+                                "XYZ Agency was instrumental in taking our online leather sales global.
+                                Their strategic use of Google Ads not only expanded our market reach but
+                                significantly boosted our sales on Amazon. Their approach was tailored
+                                and effective, showcasing our products to a worldwide audience."
+                            </p>
+                             <div class="row mt-2">
+                                <div class="col-md-2">
+                                    <img src="{% static 'feedbacks/3.png' %}"  alt="" width="60" height="60" style="border-radius: 30px;"/>
+                                </div>
+                               <div class="col-md-10">
+                                   <div class="flex-column">
+                                       <p class="text-black card-slider-subtext mb-0">Günur Tezcan</p>
+                                       <p class="text-black card-slider-subaltern">mascholster.com Owner</p>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                      </div>
+              </div>
+
+            </div>
+
+
+              </div>
+                   <!-- Slider control buttons (Preev / Next) -->
+            <div class="d-flex justify-content-center justify-content-md-end pt-4">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                     {% bs_icon 'arrow-left-circle' size='2em' color="#448c74" extra_classes="arrow-icon" %}
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    {% bs_icon 'arrow-right-circle' size='2em' color="#448c74" extra_classes="arrow-icon" %}
+                    <span class="visually-hidden">Next</span>
+                  </button>
+            </div>
+            </div>
+
+          </div>
+
+          <!-- CTA -->
+          <div class="col-md-5 col-xl-4 offset-lg-1 pt-2 pt-md-0 mt-5 mt-md-n5">
+            <div class="ps-md-4 ps-lg-0">
+              <h2 class="h1 mb-4 text-black">Empowering Over 100 Leading Companies with Google Ads, Mobile
+                  App Development, 3D Design, Social Media Management, and Website Development</h2>
+              <ul class="list-unstyled pb-2 pb-lg-0 mb-4 mb-lg-5">
+                <li class="d-flex pt-1 mt-2 text-secondary">
+                    {% bs_icon 'arrow-right-short' size='1.5em' color="#448c74" extra_classes="arrow-icon" %}
+                  24/7 customer support
+                </li>
+                <li class="d-flex pt-1 mt-2 text-secondary">
+                  {% bs_icon 'arrow-right-short' size='1.5em'  color="#448c74" extra_classes="arrow-icon" %}
+                  Lifetime support
+                </li>
+                <li class="d-flex pt-1 mt-2 text-secondary">
+                  {% bs_icon 'arrow-right-short' size='1.5em'  color="#448c74" extra_classes="arrow-icon" %}
+                  Forecasting and recommendations
+                </li>
+              </ul>
+              <a class="btn btn-lg btn-main-button rounded-pill text-white" href="{% url 'contact' %}">Start free first campaign trail</a>
+            </div>
+          </div>
+            </div>
+      </section>
+
+
+
+
+<section class="container pt-5 mt-md-3 mt-lg-2 mt-xl-4 mt-xxl-5">
+        <h2 class="h1 text-center pt-3 pt-sm-4 pt-lg-5 pb-3 mb-3 mb-lg-4 text-black">Our benefits</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+          <!-- Item -->
+          <div class="col">
+            <div class="card card-flip">
+              <div class="card-flip-inner">
+                <div class="card-flip-front bg-gray-500 rounded-5 py-2 py-lg-4 px-0">
+                  <div class="card-body text-center">
+                      {%  bs_icon 'gear-fill'  extra_classes='d-block text-primary mb-4 mx-auto' size='40px' %}
+                    <h3 class="text-black">Support</h3>
+                    <p class="card-text text-secondary">We understand the importance of
+                        constant, reliable support. That's why we offer 24/7 assistance to ensure your
+                        needs are met promptly.</p>
+                  </div>
+                </div>
+                <div class="card-flip-back rounded-5 py-2 py-lg-4 px-0" style="background-color: #448c74 !important">
+                  <div class="card-body text-center">
+                      {%  bs_icon 'gear-fill'  extra_classes='d-block text-white mt-2 mt-lg-n4 mb-4 mx-auto' size='40px' %}
+                    <div class="h3 display-4 text-white pb-1 mb-2 font-weight-bold">24/7</div>
+                    <p class="card-text text-white opacity-70 mt-3">Need help anytime? We're here for you 24/7.
+                        Quick answers via WhatsApp and email, ensuring you're never alone in your digital journey.
+                        Trust in our always-ready team for all your needs.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="col">
+            <div class="card card-flip">
+              <div class="card-flip-inner">
+                <div class="card-flip-front bg-gray-500 rounded-5 py-2 py-lg-4 px-0">
+                  <div class="card-body text-center">
+                      {% bs_icon 'x-diamond-fill' size='40px' color='#ed5050' extra_classes='d-block text-danger mb-4 mx-auto' %}
+                    <h3 class="text-black">Individual dashboard</h3>
+                    <p class="card-text text-secondary">Experience the certainty of success with our expert strategies.
+                        We guarantee a significant uptick in your revenue, leveraging targeted campaigns and
+                        data-driven tactics tailored to your unique business needs..</p>
+                  </div>
+                </div>
+                <div class="card-flip-back rounded-5 py-2 py-lg-4 px-0" style="background-color: #ed5050 !important">
+                  <div class="card-body text-center">
+                         {% bs_icon 'x-diamond-fill' size='40px' color='white' extra_classes='d-block text-white mt-2 mt-lg-n4 mb-4 mx-auto' %}
+                    <div class="h3 display-4 text-white pb-1 mb-2 font-weight-bold">136</div>
+                    <p class="card-text text-white opacity-70 mt-3">Transform your business with our assured
+                        revenue enhancement approach. Our team commits to delivering measurable growth in your
+                        earnings, employing innovative techniques and personalized solutions for optimal results.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="col">
+            <div class="card card-flip">
+              <div class="card-flip-inner">
+                <div class="card-flip-front bg-gray-500 rounded-5 py-2 py-lg-4 px-0">
+                  <div class="card-body text-center">
+                       {% bs_icon 'bar-chart-line-fill' size='40px' color='#3f7fca' extra_classes='d-block mb-4 mx-auto' %}
+                    <h3 class="text-black">Reliable data</h3>
+                    <p class="card-text text-secondary">Stay ahead with our weekly meetings, a vital touchpoint for
+                        strategy refinement and progress review. These sessions ensure we're aligned with your goals,
+                        adapting to new insights and keeping your campaigns on the cutting edge."</p>
+                  </div>
+                </div>
+                <div class="card-flip-back  rounded-5 py-2 py-lg-4 px-0" style="background-color: #3f7fca !important">
+                  <div class="card-body text-center">
+                      {% bs_icon 'bar-chart-line-fill' size='40px' color='white' extra_classes='d-block text-white mt-2 mt-lg-n4 mb-4 mx-auto' %}
+                    <div class="h3 display-4 text-white pb-1 mb-2 font-weight-bold">100%</div>
+                    <p class="card-text text-white opacity-70 mt-3">Get daily updates on your campaign's performance
+                        with our detailed reports. This frequent analysis highlights key metrics and trends, allowing
+                        for swift adjustments and ensuring continuous optimization of your digital strategy.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+ <div class="container">
+        <div class="row p-5">
+            <div class="col-12 col-md-8 justify-content-center items-center ">
+                <h2 class="font-weight-bold display-4 mt-5 text-black">Powered by Industry-Leading Tools</h2>
+                <a href="{% url 'contact' %}" class="btn btn-outline-success rounded-pill text-primary px-3 py-3 mt-5">Discover Our Advanced Toolkit</a>
+
+            </div>
+            <div class="col-12 col-md-4 mt-5">
+               <div class="p-xs-2 p-sm-2" style="position: relative;">
+                   <div class="row justify-content-md-center mx-auto my-auto items-center gx-1">
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/1.png' %}" alt="" id="logos-1" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/2.png' %}" alt="" id="logos-2" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/3.png' %}" alt="" id="logos-3" class="below-logo"/>
+                       </div>
+                        <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/4.png' %}" alt="" id="logos-1" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/5.png' %}" alt="" id="logos-2" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/6.png' %}" alt="" id="logos-3" class="below-logo"/>
+                       </div>
+                        <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/7.png' %}" alt="" id="logos-1" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/8.png' %}" alt="" id="logos-2" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/9.png' %}" alt="" id="logos-3" class="below-logo"/>
+                       </div>
+                        <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/10.png' %}" alt="" id="logos-1" class="below-logo"/>
+                       </div>
+                       <div class="col-4 col-md-3 m-0 p-0">
+                            <img src="{% static 'images/belowlogos/11.png' %}" alt="" id="logos-2" class="below-logo"/>
+                       </div>
+                   </div>
+                <img id="mainimagesec" src="{% static 'images/daire.png' %}" alt="" />
+            </div>
+            </div>
+        </div>
+    </div>
+<div class="container">
+
+    <h3 class="text-black display-5 mt-2 mb-2">Latest Insights and Updates</h3>
+    <div class="row justify-content-center">
+        {% for post in blogs %}
+        <div class="col col-12 col-md-4 margin-below">
+            <div class="card" style="border-radius: 30px;border:transparent;">
+              <img src="{{ post.image.url }}"  alt="..." style="border-radius: 30px;">
+              <div class="card-body">
+                  <a href="{% url 'blog_detail' slug=post.slug %}" class="no-underline">
+                      <h3 class="h3" style="color:#434a57!important;">
+                          {{ post.title }}
+                      </h3>
+                      </a>
+              </div>
+                <div class="inline-group text-left justify-content-center">
+                    {% for tag in post.tags.all %}
+                        <a href="{% url 'posts_by_tag' tag.slug %}" class="text-success border border-success rounded-pill px-3 py-1
+                        font-weight-normal btn-main-button-light no-underline">{{ tag.title }}</a>
+                     {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-md-12 text-center justify-content-center mt-5 mb-5">
+        <a href="{% url 'blog' %}" class="btn btn-outline-success rounded-pill px-4 py-2">
+            Read All Insights
+        </a>
+    </div>
+</div>
+
+
+    <div class="container mt-5 b-5">
+    <h3 class="text-black display-5 mt-2 mb-2">Showcasing Our Success Stories & Expert Strategies</h3>
+    <div class="row justify-content-center">
+        {% for post in cases %}
+        <div class="col col-12 col-md-4 margin-below">
+            <div class="card" style="border-radius: 30px;border:transparent;">
+              <img src="{{ post.image.url }}"  alt="..." style="border-radius: 30px;">
+              <div class="card-body">
+                  <a href="{% url 'case_detail' slug=post.slug %}" class="no-underline">
+                      <h3 class="h3" style="color:#434a57!important;">
+                          {{ post.title }}
+                      </h3>
+                      </a>
+              </div>
+                <div class="inline-group text-left justify-content-center">
+                    {% for tag in post.tags.all %}
+                        <a href="{% url 'posts_by_tag' tag.slug %}" class="text-success border border-success rounded-pill px-3 py-1
+                        font-weight-normal btn-main-button-light no-underline">{{ tag.title }}</a>
+                     {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-md-12 text-center justify-content-center mt-5 mb-5">
+        <a {% url 'case' %} class="btn btn-outline-success rounded-pill px-4 py-2">
+            Read All Success Stories
+        </a>
+    </div>
+</div>
+
+{% endblock content %}

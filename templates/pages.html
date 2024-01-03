@@ -1,0 +1,118 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block title %} Blog Page {% endblock title %}
+{% block metadata %} Bu sayfa blog detay sayfasıdır {% endblock metadata %}
+
+{% block content %}
+    <style>
+body, html {
+    height: 100%;
+}
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+    horiz-align: center;
+    padding-left: 2.375rem;
+    justify-content: center;
+}
+
+.text-black-with-opacity-20 {
+    color: rgba(18, 21, 25, 0.8)!important;
+}
+.no-underline {
+    text-decoration: none;
+}
+
+.has-search .form-control-feedback {
+    margin: 19px;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    text-align: center;
+    horiz-align: center;
+    line-height: 2.375rem;
+    pointer-events: none;
+    color: #aaa;
+}
+.search-form {
+    padding: .825rem 1rem;
+}
+
+a {
+    transition: color .2s ease-in-out;
+}
+a:hover {
+    color: #448c74;
+}
+.text-soft-black {
+    color: #576071;
+}
+
+
+.form-control::-moz-placeholder {
+    color: rgba(27, 27, 27, 0.5);
+    opacity:0.8;
+}
+
+.form-control::placeholder {
+    color: rgba(27, 27, 27, 0.5);
+    opacity:0.8;
+}
+
+.bg-card {
+    background-color: #f5f9fc!important;
+    border: none;
+}
+
+.lp-icon {
+    padding: 5px;
+    margin-top: 10px;
+}
+.lp-icon-border {
+
+}
+
+
+
+    </style>
+<div class="container">
+    <div class="col col-12 col-md-12">
+        <div class="d-flex m-5">
+            <p class="text-secondary">Home</p>
+            <span class="text-secondary" style="margin-left: 10px;"> > </span>
+            <p class="text-secondary" style="margin-left: 10px;">Pages</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-9">
+                <h3 class="display-4 font-weight-bold text-black-with-opacity-20">
+                    {{ post.title }}
+                </h3>
+                <div class="d-flex flex-wrap align-items-center mt-n2">
+                    <span class="fs-sm text-body-secondary mt-2" style="color:#448c74;">{{ post.updated }}</span>
+                </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <p class="m-5 text-secondary" style="font-size:20px;">
+                    {{ post.content|safe }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

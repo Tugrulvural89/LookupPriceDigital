@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block title %} Blog Page {% endblock title %}
+{% block metadata %} Bu sayfa blog detay sayfasıdır {% endblock metadata %}
+{% block content %}
+
+
+<div class="container">
+
+    <div class="col col-12 col-md-12">
+        <div class="d-flex m-5">
+            <p class="text-secondary">Home</p>
+            <span class="text-secondary" style="margin-left: 10px;"> > </span>
+            <p class="text-secondary" style="margin-left: 10px;">Best Practices</p>
+        </div>
+    </div>
+<div class="col-12 col-md-12">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <h3 class="text-black display-4 font-weight-bold">
+                Successful Stories
+            </h3>
+        </div>
+        <div class="col-12 col-md-4 float-right mx-auto my-auto">
+              {% include 'layouts/search_form.html' %}
+        </div>
+    </div>
+</div>
+
+
+    {% for post in posts %}
+<article class="row g-0 border-0 mb-4 mt-4">
+          <a class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-20
+          text-black-with-opacity-20 no-underline"
+             href="{% url 'case_detail' slug=post.slug %}"
+             style="background-image: url('{{ post.image.url }}'); min-height: 16rem" aria-label="Post image">
+          <div class="col-sm-7 col-lg-8">
+            <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
+              <h3>
+                <a href="{% url 'case_detail' slug=post.slug %}"
+                   class="text-black-with-opacity-20 no-underline">{{ post.title }}</a>
+              </h3>
+              <span class="d-sm-none d-md-block text-soft-black">
+                  {{ post.content|truncatewords_html:50|safe }}
+              </span>
+              <div class="d-flex flex-wrap align-items-center mt-n2">
+                <span class="fs-sm text-body-secondary mt-2" style="color:#448c74;">{{ post.updated }}</span>
+                <span class="fs-xs opacity-20 mt-2 mx-3"  style="color:#448c74;text-decoration: none;">|</span>
+              {% if  post.tags.all|length > 0 %}
+                     {% for tag in post.tags.all %}
+                          <a class="badge text-nav fs-xs border mt-2 p-1"
+                             href="{% url 'posts_by_tag' tag.slug %}"
+                             style="color:#448c74;text-decoration: none;">{{ tag.title }}</a>
+                     {% endfor %}
+              {% endif %}
+              </div>
+            </div>
+          </div>
+              </a>
+        </article>
+{% endfor %}
+
+{% include 'layouts/pagging.html' %}
+</div>
+{% endblock content %}
