@@ -23,67 +23,86 @@
     if (scrollY < 100) {
         if (isMobile) {
             // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-            icon.style.left = '-100px';
-            icon.style.top = '5px';
+            icon.style.left = '-10%';
+            icon.style.top = '-30%';
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon3.style.top = '-5%';
+            icon3.style.left = '15%';
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon2.style.top = '15%';
+            icon2.style.left = '0';
         } else {
             // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-            icon.style.left = '60px';
-            icon.style.top = '5px';
+            icon.style.right = '10%';
+            icon.style.top = '-20%';
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon3.style.top = '-35%';
+            icon3.style.left = '15%';
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon2.style.top = '-15%';
+            icon2.style.left = '0';
         }
 
 
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon2.style.top = '0';
-        icon2.style.left = '-10px';
 
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon3.style.top = '3px';
-        icon3.style.left = '-10px';
     } else if (scrollY < 200) {
         if (isMobile) {
             // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-            icon.style.left = '-90px';
-            icon.style.top = '20px';
+            icon.style.left = '-5%';
+            icon.style.top = '-20%';
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon3.style.top = '-15%';
+            icon3.style.left = '5%';
+         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon2.style.top = '10%';
+            icon2.style.left = '5%';
         } else {
             // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-            icon.style.left = '50px';
-            icon.style.top = '20px';
+            icon.style.right = '15%';
+            icon.style.top = '10px';
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon3.style.top = '-15%';
+            icon3.style.left = '5%';         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon2.style.top = '10%';
+            icon2.style.left = '5%';
         }
 
-         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon2.style.top = '5px';
-        icon2.style.left = '0px';
 
 
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon3.style.top = '5px';
-        icon3.style.left = '-20px';
+
+
 
     } else {
         if (isMobile) {
             // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-            icon.style.left = '-75px';
-            icon.style.top = '5px';
+            icon.style.left = '-8%';
+            icon.style.top = '-25%';
+
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon3.style.top = '-10%';
+            icon3.style.left = '10%';         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon2.style.top = '12%';
+            icon2.style.left = '5%';
         } else {
             // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-            icon.style.left = '70px';
-            icon.style.top = '10px';
+            icon.style.right = '10%';
+            icon.style.top = '-10%';
+
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon3.style.top = '-10%';
+            icon3.style.left = '10%';         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon2.style.top = '12%';
+            icon2.style.left = '5%';
         }
 
-          // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon2.style.top = '0';
-        icon2.style.left = '-10px';
 
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon3.style.top = '0';
-        icon3.style.left = '-30px';
     }
 });
 
     </script>
-    <div class="bg-dark">
+    <div class="container-fluid bg-dark text-white text-center full-width-div">
         <div class="row justify-content-center items-center p-5">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-12 col-lg-6">
                 <span class="y-snap text-wrap fs-6 fs-6" id="wrap-headline-text">Discover Your Digital Dreams with Us!  🚀</span>
                 <h1 class="font-weight-bold display-2 mt-5">Transforming Ideas into Digital Realities</h1>
                 <ul class="list-unstyled">
@@ -110,7 +129,7 @@
 
             </div>
 
-            <div class="col-12 col-md-4 mt-sm-3">
+            <div class="col-12 col-md-12 col-lg-6 mt-sm-3">
                 <div class="p-xs-2 p-sm-2" style="position: relative;">
                 <img id="mainimage" src="{% static 'images/daire.png' %}"  alt="" />
                  <img src="{% static 'images/05.png' %}"  alt="" id="moving-icon"/>
