@@ -12,49 +12,71 @@
 {% block content %}
      <script>
         document.addEventListener('scroll', function() {
-    var icon = document.getElementById('moving-icon');
-    var icon2 = document.getElementById('moving-icon2');
-    var icon3 = document.getElementById('moving-icon3');
-    var scrollY = window.scrollY || document.documentElement.scrollTop;
+            const icon = document.getElementById('moving-icon');
+            const icon2 = document.getElementById('moving-icon2');
+            const icon3 = document.getElementById('moving-icon3');
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+            const isMobile = window.innerWidth <= 768; // 768px genellikle mobil cihazlar için bir eşik değerdir.
+
 
     if (scrollY < 100) {
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon.style.right = '-30px';
-        icon.style.top = '5px';
+        if (isMobile) {
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon.style.left = '-100px';
+            icon.style.top = '5px';
+        } else {
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon.style.left = '60px';
+            icon.style.top = '5px';
+        }
+
 
         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon2.style.top = '20px';
-        icon2.style.left = '20px';
+        icon2.style.top = '0';
+        icon2.style.left = '-10px';
 
         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon3.style.top = '10px';
-        icon3.style.left = '20px';
+        icon3.style.top = '3px';
+        icon3.style.left = '-10px';
     } else if (scrollY < 200) {
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon.style.left = '10px';
-        icon.style.top = '20px';
+        if (isMobile) {
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon.style.left = '-90px';
+            icon.style.top = '20px';
+        } else {
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon.style.left = '50px';
+            icon.style.top = '20px';
+        }
 
          // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon2.style.top = '30px';
-        icon2.style.left = '5px';
+        icon2.style.top = '5px';
+        icon2.style.left = '0px';
 
 
         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon3.style.top = '10px';
-        icon3.style.left = '30px';
+        icon3.style.top = '5px';
+        icon3.style.left = '-20px';
 
     } else {
-        // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon.style.right = '-45';
-        icon.style.top = '5px';
+        if (isMobile) {
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon.style.left = '-75px';
+            icon.style.top = '5px';
+        } else {
+            // Sayfa en üstteyken, ikon sol tarafa hareket etsin
+            icon.style.left = '70px';
+            icon.style.top = '10px';
+        }
 
           // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon2.style.top = '15px';
-        icon2.style.left = '10px';
+        icon2.style.top = '0';
+        icon2.style.left = '-10px';
 
         // Sayfa en üstteyken, ikon sol tarafa hareket etsin
-        icon3.style.top = '20px';
-        icon3.style.left = '10px';
+        icon3.style.top = '0';
+        icon3.style.left = '-30px';
     }
 });
 
@@ -62,7 +84,7 @@
     <div class="bg-dark">
         <div class="row justify-content-center items-center p-5">
             <div class="col-12 col-md-4">
-                <span class="y-snap">Discover Your Digital Dreams with Us!  🚀</span>
+                <span class="y-snap text-wrap fs-6 fs-6" id="wrap-headline-text">Discover Your Digital Dreams with Us!  🚀</span>
                 <h1 class="font-weight-bold display-2 mt-5">Transforming Ideas into Digital Realities</h1>
                 <ul class="list-unstyled">
                     <li>
@@ -383,19 +405,19 @@
 
           <!-- CTA -->
           <div class="col-md-5 col-xl-4 offset-lg-1 pt-2 pt-md-0 mt-5 mt-md-n5">
-            <div class="ps-md-4 ps-lg-0">
-              <h2 class="h1 mb-4 text-black">Empowering Over 100 Leading Companies with Google Ads, Mobile
+            <div class="ps-md-4 ps-lg-0 text-center justify-content-center align-center">
+              <h2 class="h1 mb-4 text-black text-center">Empowering Over 100 Leading Companies with Google Ads, Mobile
                   App Development, 3D Design, Social Media Management, and Website Development</h2>
-              <ul class="list-unstyled pb-2 pb-lg-0 mb-4 mb-lg-5">
-                <li class="d-flex pt-1 mt-2 text-secondary">
+              <ul class="list-unstyled pb-2 pb-lg-0 mb-4 mb-lg-5 text-center">
+                <li class="d-flex pt-1 mt-2 text-secondary text-center">
                     {% bs_icon 'arrow-right-short' size='1.5em' color="#448c74" extra_classes="arrow-icon" %}
                   24/7 customer support
                 </li>
-                <li class="d-flex pt-1 mt-2 text-secondary">
+                <li class="d-flex pt-1 mt-2 text-secondary text-center">
                   {% bs_icon 'arrow-right-short' size='1.5em'  color="#448c74" extra_classes="arrow-icon" %}
                   Lifetime support
                 </li>
-                <li class="d-flex pt-1 mt-2 text-secondary">
+                <li class="d-flex pt-1 mt-2 text-secondary text-center">
                   {% bs_icon 'arrow-right-short' size='1.5em'  color="#448c74" extra_classes="arrow-icon" %}
                   Forecasting and recommendations
                 </li>
@@ -409,7 +431,7 @@
 
 
 
-<section class="container pt-5 mt-md-3 mt-lg-2 mt-xl-4 mt-xxl-5">
+<section class="container pt-5 mt-md-3 mt-lg-2 mt-xl-4 mt-xxl-5 text-center">
         <h2 class="h1 text-center pt-3 pt-sm-4 pt-lg-5 pb-3 mb-3 mb-lg-4 text-black">Our benefits</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
