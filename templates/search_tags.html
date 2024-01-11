@@ -33,9 +33,9 @@
 </div>
     {% for post in posts %}
 <article class="row g-0 border-0 mb-4 mt-4">
-          <a class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-center rounded-20 text-black-with-opacity-20 no-underline"
+          <a class="col-sm-5 col-lg-4 bg-repeat-0 bg-size-cover bg-position-contain rounded-20 text-black-with-opacity-20 no-underline"
              href="{% if post.types == 'case' %} {% url 'case_detail' slug=post.slug %} {% else %}{% url 'blog_detail' slug=post.slug %} {% endif %}"
-             style="background-image: url('{{ post.image.url }}'); min-height: 16rem" aria-label="Post image">  </a>
+             style="background-image: url('{{ post.image.url }}'); min-height: 16rem; background-size: contain;" aria-label="Post image">  </a>
           <div class="col-sm-7 col-lg-8">
             <div class="pt-4 pb-sm-4 ps-sm-4 pe-lg-4">
               <h3>
@@ -49,7 +49,7 @@
                 <span class="fs-sm text-body-secondary mt-2" style="color:#448c74;">{{ post.updated }}</span>
                 <span class="fs-xs opacity-20 mt-2 mx-3"  style="color:#448c74;text-decoration: none;">|</span>
                   {% if  post.tags.all|length > 0 %}
-                     {% for tag in post.tags.all %}
+                     {% for tag in post.tags.all|slice:":3" %}
                           <a class="badge text-nav fs-xs border mt-2 p-1"
                              href="{% url 'posts_by_tag' tag.slug %}"
                              style="color:#448c74;text-decoration: none;">{{ tag.title }}</a>

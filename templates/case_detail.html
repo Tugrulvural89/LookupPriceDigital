@@ -170,13 +170,16 @@ a:hover {
     <h3 class="text-black display-5 mb-3 mt-3">Related articles</h3>
         <div class="row justify-content-center">
             {% for blog in content %}
+
                 <div class="col col-12 col-md-4 margin-below">
-            <div class="card" style="border-radius: 30px;border:transparent;">
+                 <div class="card" style="border-radius: 30px;border:transparent;">
               <img src="{{ blog.image.url }}"  alt="..." style="border-radius: 30px;">
               <div class="card-body">
+                  <a href="{% url 'case_detail' slug=blog.slug %}" class="text-black-with-opacity-20 no-underline">
                   <h3 class="h3" style="color:#434a57!important;">
                       {{ blog.title|truncatechars_html:15 }}
                   </h3>
+                  </a>
                 <p class="card-text text-secondary mt-2" style="font-weight: 300;">
                     {{ blog.content|truncatewords_html:5|safe }}
                 </p>
@@ -189,7 +192,8 @@ a:hover {
                 </div>
 
             </div>
-        </div>
+                </div>
+
             {% endfor %}
     </div>
     </section>

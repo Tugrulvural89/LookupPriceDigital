@@ -644,7 +644,7 @@
                       </a>
               </div>
                 <div class="inline-group text-left justify-content-center">
-                    {% for tag in post.tags.all %}
+                    {% for tag in post.tags.all|slice:":3" %}
                         <a href="{% url 'posts_by_tag' tag.slug %}" class="text-success border border-success rounded-pill px-3 py-1
                         font-weight-normal btn-main-button-light no-underline">{{ tag.title }}</a>
                      {% endfor %}
