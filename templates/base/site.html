@@ -1,5 +1,5 @@
 {% load static %}<!DOCTYPE html>
-<html lang="en">
+<html lang="{% block lang %}en{% endblock %}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,6 +7,7 @@
 <meta name="description" content="{% block description %}{% endblock %}">
 <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large{% endblock %}">
 <link rel="canonical" href="{% block canonical %}https://www.lookupprice.com{{ request.path }}{% endblock %}">
+{% block alternates %}{% endblock %}
 <meta property="og:type" content="{% block og_type %}website{% endblock %}">
 <meta property="og:site_name" content="Lookup Price">
 <meta property="og:locale" content="en_US">
@@ -140,7 +141,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
   </div>
 </header>
 <main>{% block content %}{% endblock %}</main>
-<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · Barcelona · Istanbul · Paris</span><span><a href="{% url 'blog' %}">Blog</a> · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a></span></div></footer>
+<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · Barcelona · Istanbul · Paris</span><span><a href="{% url 'blog' %}">Blog</a> · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a> · <a href="{% url 'privacy' %}">Privacy</a></span></div></footer>
 <script>
 (() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;

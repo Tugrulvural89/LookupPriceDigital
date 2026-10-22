@@ -1,0 +1,21 @@
+{% extends 'base/site.html' %}
+{% block lang %}{{ lang }}{% endblock %}
+{% block title %}{{ p.title }}{% endblock %}
+{% block description %}{{ p.description }}{% endblock %}
+{% block og_title %}{{ p.h1 }}{% endblock %}
+{% block og_description %}{{ p.description }}{% endblock %}
+{% block alternates %}{% for code, url in alternates %}<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+{% endfor %}<link rel="alternate" hreflang="x-default" href="https://www.lookupprice.com/privacy/">{% endblock %}
+{% block content %}
+<article class="page gut">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{{ home_url }}">Lookup Price</a><span>/</span><span>{{ p.eyebrow }}</span></nav>
+    <h1>{{ p.h1 }}</h1>
+    <p class="meta">{{ p.updated }} <time datetime="{{ updated }}">{{ updated }}</time></p>
+    <div class="tags">{% for code, url in alternates %}<a href="{{ url }}" hreflang="{{ code }}"{% if code == lang %} aria-current="page"{% endif %}>{{ code|upper }}</a>{% endfor %}</div>
+  </header>
+  <div class="prose">
+    {% for heading, paras in p.sections %}<h2>{{ heading }}</h2>{% for para in paras %}<p>{{ para }}</p>{% endfor %}{% endfor %}
+  </div>
+</article>
+{% endblock %}

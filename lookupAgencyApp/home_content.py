@@ -88,6 +88,7 @@ CONTENT = {
         'f_sent': 'Thanks. We will reply within one business day.',
         'f_error': 'Please fill in your name, email, company and phone.',
         'footer_services': 'Ads · AI · Studio',
+        'privacy': 'Privacy Policy', 'consent': 'We use your details only to reply. See our',
     },
     'es': {
         'html_lang': 'es', 'og_locale': 'es_ES',
@@ -173,6 +174,7 @@ CONTENT = {
         'f_sent': 'Gracias. Te respondemos en un día laborable.',
         'f_error': 'Rellena tu nombre, email, empresa y teléfono.',
         'footer_services': 'Anuncios · IA · Estudio',
+        'privacy': 'Política de privacidad', 'consent': 'Usamos tus datos solo para responderte. Consulta nuestra',
     },
     'tr': {
         'html_lang': 'tr', 'og_locale': 'tr_TR',
@@ -258,5 +260,6 @@ CONTENT = {
         'f_sent': 'Teşekkürler. Bir iş günü içinde dönüyoruz.',
         'f_error': 'Lütfen ad, e-posta, firma ve telefonu doldurun.',
         'footer_services': 'Reklam · Yapay Zeka · Stüdyo',
+        'privacy': 'Gizlilik Politikası', 'consent': 'Bilgilerinizi yalnızca size dönmek için kullanırız. Ayrıntılar:',
     },
 }

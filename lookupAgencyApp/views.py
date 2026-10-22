@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from lookupAgencyApp.forms import ContactForm
 from lookupAgencyApp.models import Post, Tags, StaticPages
 from lookupAgencyApp.home_content import CONTENT
+from lookupAgencyApp.privacy_content import PRIVACY, UPDATED
 import json
 
 
@@ -15,6 +16,7 @@ import json
 
 BASE_URL = 'https://www.lookupprice.com'
 HOME_URLS = {'en': '/', 'es': '/es/', 'tr': '/tr/'}
+PRIVACY_URLS = {'en': '/privacy/', 'es': '/es/privacy/', 'tr': '/tr/privacy/'}
 SHOT_IMGS = ['tryon', 'turntable', 'film', 'banner', 'living', 'scene']
 
 
@@ -57,6 +59,7 @@ def index(request, lang='en'):
         'shots': [(*shot, 'home/%s.webp' % img) for shot, img in zip(t['shots'], SHOT_IMGS)],
         'stack_imgs': ['home/%s.webp' % i for i in ('tryon', 'turntable', 'film', 'banner', 'scene')],
         'schema': json.dumps(schema, ensure_ascii=False).replace('</', '<\\/'),
+        'privacy_url': PRIVACY_URLS[lang],
         'posted': posted, 'error': error, 'sent': request.GET.get('sent') == '1',
     }
     return render(request, 'home.html', context)
@@ -169,3 +172,10 @@ def case_detail(request, slug=None, *args, **kwargs):
 def static_pages(request, slug=None, *args, **kwargs):
     post = get_object_or_404(StaticPages, slug=slug, is_published=True)
     return render(request, 'pages.html', {'post': post, 'seo_description': _plain(post.content)})
+
+
+def privacy(request, lang='en'):
+    return render(request, 'privacy.html', {
+        'p': PRIVACY[lang], 'lang': lang, 'updated': UPDATED, 'home_url': HOME_URLS[lang],
+        'alternates': [(code, BASE_URL + url) for code, url in PRIVACY_URLS.items()],
+    })

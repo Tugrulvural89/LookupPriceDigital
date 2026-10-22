@@ -240,6 +240,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
 h1 .h1k{display:flex;justify-content:center;gap:10px;align-items:center;font:500 12px/1.4 var(--mono);color:var(--mute);letter-spacing:.12em;text-transform:uppercase;font-stretch:100%;margin-bottom:26px}
 h1 .h1k::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--coral);animation:ping 2.2s infinite}
 .err{font-size:15px;color:var(--coral)}
+.consent{font-size:13px;color:var(--mute);margin:0}.consent a{color:var(--soft)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 </style>
 </head>
@@ -404,6 +405,7 @@ h1 .h1k::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;back
         </fieldset>
         <label for="f-msg">{{ t.f_msg }}<textarea id="f-msg" name="msg" placeholder="{{ t.f_msg_ph }}">{{ posted.msg }}</textarea></label>
         <button class="btn primary" type="submit" data-sfx="tap">{{ t.f_send }}</button>
+        <p class="consent">{{ t.consent }} <a href="{{ privacy_url }}">{{ t.privacy }}</a>.</p>
         {% if sent %}<p class="sent" role="status">{{ t.f_sent }}</p>{% endif %}
         {% if error %}<p class="err" role="alert">{{ t.f_error }}</p>{% endif %}
       </form>
@@ -411,7 +413,7 @@ h1 .h1k::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;back
   </section>
 </main>
 
-<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · {{ t.cities }}</span><span>{{ t.footer_services }} · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a> · <a href="{% url 'blog' %}">Blog</a></span></div></footer>
+<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · {{ t.cities }}</span><span>{{ t.footer_services }} · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a> · <a href="{% url 'blog' %}">Blog</a> · <a href="{{ privacy_url }}">{{ t.privacy }}</a></span></div></footer>
 
 <script>
 
