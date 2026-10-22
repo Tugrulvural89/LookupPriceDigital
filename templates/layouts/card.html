@@ -1,0 +1,9 @@
+<a class="card" href="{{ post.get_absolute_url }}">
+  {% if post.image %}<img src="{{ post.image.url }}" alt="{{ post.title }}" width="640" height="360" loading="lazy" decoding="async">{% endif %}
+  <div class="body">
+    <p class="meta"><span>{% if post.types == 'case' %}Case{% else %}Blog{% endif %}</span><time datetime="{{ post.created|date:'c' }}">{{ post.created|date:"M j, Y" }}</time></p>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content|striptags|safe|truncatewords:26 }}</p>
+    {% if post.tags.all %}<div class="tags">{% for tag in post.tags.all|slice:":3" %}<span>{{ tag.title }}</span>{% endfor %}</div>{% endif %}
+  </div>
+</a>

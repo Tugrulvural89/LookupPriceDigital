@@ -1,0 +1,36 @@
+{% extends 'base/site.html' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block description %}{{ page_description }}{% endblock %}
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ page_description }}{% endblock %}
+{% block robots %}{% if noindex %}noindex, follow{% else %}index, follow, max-image-preview:large{% endif %}{% endblock %}
+{% block canonical %}https://www.lookupprice.com{{ request.path }}{% if posts.number > 1 %}?page={{ posts.number }}{% endif %}{% endblock %}
+{% block content %}
+<section class="page gut">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">{{ eyebrow }}</p>
+      <h1>{{ heading|safe }}</h1>
+      {% if lede %}<p class="lede">{{ lede }}</p>{% endif %}
+      <form class="search" action="{% url 'search' %}" method="get" role="search">
+        <label for="q" class="eyebrow" style="position:absolute;left:-9999px">Search</label>
+        <input id="q" name="query" placeholder="Search articles and cases" value="{{ query|default:'' }}" minlength="4">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    {% if posts %}
+    <div class="grid">{% for post in posts %}{% include 'layouts/card.html' %}{% endfor %}</div>
+    {% if posts.paginator.num_pages > 1 %}
+    <nav class="pager" aria-label="Pages">
+      {% if posts.has_previous %}<a href="?{% if query %}query={{ query|urlencode }}&amp;{% endif %}page={{ posts.previous_page_number }}" rel="prev">← Prev</a>{% endif %}
+      {% for num in posts.paginator.page_range %}{% if num == posts.number %}<span aria-current="page">{{ num }}</span>{% else %}<a href="?{% if query %}query={{ query|urlencode }}&amp;{% endif %}page={{ num }}">{{ num }}</a>{% endif %}{% endfor %}
+      {% if posts.has_next %}<a href="?{% if query %}query={{ query|urlencode }}&amp;{% endif %}page={{ posts.next_page_number }}" rel="next">Next →</a>{% endif %}
+    </nav>
+    {% endif %}
+    {% else %}
+    <p class="empty">{{ empty_text }}</p>
+    {% endif %}
+    <div class="cta"><h2>Tell us what you <span class="glow">sell.</span></h2><a class="btn" href="{% url 'index' %}#contact">Start a project</a></div>
+  </div>
+</section>
+{% endblock %}

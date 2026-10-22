@@ -1,0 +1,29 @@
+{% extends 'base/site.html' %}
+{% block title %}{{ seo_title }}{% endblock %}
+{% block description %}{{ seo_description }}{% endblock %}
+{% block og_title %}{{ post.title }}{% endblock %}
+{% block og_description %}{{ seo_description }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{% if post.image %}https://www.lookupprice.com{{ post.image.url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block schema %}<script type="application/ld+json">{{ schema|safe }}</script>{% endblock %}
+{% block content %}
+<article class="page gut">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="{% url 'index' %}">Home</a><span>/</span><a href="{{ list_url }}">{{ list_name }}</a></nav>
+    <h1>{{ post.title }}</h1>
+    <p class="meta"><time datetime="{{ post.created|date:'c' }}">{{ post.created|date:"F j, Y" }}</time>{% if post.updated|date:'Ymd' != post.created|date:'Ymd' %}<span>Updated {{ post.updated|date:"F j, Y" }}</span>{% endif %}{% if post.author %}<span>{{ post.author.name }}</span>{% endif %}</p>
+    {% if post.tags.all %}<div class="tags">{% for tag in post.tags.all %}<a href="{% url 'posts_by_tag' tag.slug %}" rel="tag">{{ tag.title }}</a>{% endfor %}</div>{% endif %}
+  </header>
+  {% if post.image %}<figure class="hero-img"><img src="{{ post.image.url }}" alt="{{ post.title }}" width="1600" height="900" fetchpriority="high"></figure>{% endif %}
+  <div class="prose">{{ post.content|safe }}</div>
+  {% if post.author %}
+  <div class="author">{% if post.author.avatar %}<img src="{{ post.author.avatar.url }}" alt="{{ post.author.name }}" width="56" height="56" loading="lazy">{% endif %}<div><b>{{ post.author.name }}</b><span>{{ post.author.description }}</span></div></div>
+  {% endif %}
+  <div class="wrap">
+    {% if related %}
+    <section class="more"><h2>More from Lookup Price</h2><div class="grid">{% for post in related %}{% include 'layouts/card.html' %}{% endfor %}</div></section>
+    {% endif %}
+    <div class="cta"><h2>Tell us what you <span class="glow">sell.</span></h2><a class="btn" href="{% url 'index' %}#contact">Start a project</a></div>
+  </div>
+</article>
+{% endblock %}
