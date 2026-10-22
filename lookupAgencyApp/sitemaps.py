@@ -11,7 +11,7 @@ class PostsSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.filter(is_published=True)
 
     def lastmod(self, obj):
         return obj.updated
@@ -22,7 +22,7 @@ class PagesSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return StaticPages.objects.all()
+        return StaticPages.objects.filter(is_published=True)
 
     def lastmod(self, obj):
         return obj.updated
@@ -33,7 +33,7 @@ class StaticViewSitemap(Sitemap):
     priority = 0.9
 
     def items(self):
-        return ['index', 'contact', 'blog', 'case', 'search']
+        return ['index', 'index_es', 'index_tr', 'blog', 'case']
 
     def location(self, item):
         return reverse(item)

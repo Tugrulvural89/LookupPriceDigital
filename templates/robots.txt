@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /admin/
-Sitemap: https://www.yoursite.com/sitemap.xml
+Disallow: /search/
+
+Sitemap: https://www.lookupprice.com/sitemap.xml

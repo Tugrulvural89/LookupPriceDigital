@@ -1,0 +1,574 @@
+{% load static %}<!DOCTYPE html>
+<html lang="{{ t.html_lang }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ t.title }}</title>
+<meta name="description" content="{{ t.description }}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="{{ canonical }}">
+{% for code, url in alternates %}<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+{% endfor %}<link rel="alternate" hreflang="x-default" href="{{ base_url }}/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lookup Price">
+<meta property="og:locale" content="{{ t.og_locale }}">
+<meta property="og:title" content="{{ t.title }}">
+<meta property="og:description" content="{{ t.description }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ base_url }}{% static 'home/og.jpg' %}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ t.title }}">
+<meta name="twitter:description" content="{{ t.description }}">
+<meta name="twitter:image" content="{{ base_url }}{% static 'home/og.jpg' %}">
+<meta name="theme-color" content="#070b16">
+<link rel="icon" type="image/png" href="{% static 'logos/mylogo.png' %}">
+<script type="application/ld+json">{{ schema|safe }}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+
+/* Layout: one continuous scroll film. A fixed light-ring canvas lives behind the whole page and
+   changes with each scene; scenes are sticky "stages" whose length sets how long the story lingers.
+   Two of them turn vertical scroll into sideways travel. Contact is the last frame. */
+:root{
+  --stage:#070b16; --stage-2:#0d1424cc; --line:#1d2840;
+  --ivory:#f3efe8; --ink:#0c111d; --mute:#8a93a8; --soft:#b4bccb;
+  --coral:#ff7a59; --teal:#5fd6e3; --amber:#ffb45e;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --glow:linear-gradient(100deg,var(--coral) 0%,var(--amber) 38%,var(--teal) 100%);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+.feat a{text-decoration:none}
+body{background:var(--stage);color:var(--ivory);font:400 17px/1.55 var(--body);overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--stage)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;width:100%}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;font-weight:800;letter-spacing:-.02em;line-height:.96;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.glow{background:var(--glow);-webkit-background-clip:text;background-clip:text;color:transparent}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+
+/* the film's light: fixed behind everything */
+#sky{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+
+/* nav (kept as approved) */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--stage) 62%,transparent);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:22px;height:56px}
+.brand{font:800 17px/1 var(--display);font-stretch:118%;letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:9px}
+.brand i{width:18px;height:18px;border-radius:50%;background:conic-gradient(from 200deg,var(--coral),var(--amber),var(--teal),var(--coral));display:block;animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(1turn)}}
+.nav nav{display:flex;gap:22px;margin-left:auto;font-size:14px}
+.nav nav a{text-decoration:none;color:var(--mute);transition:color .2s}
+.nav nav a:hover,.nav nav a.cur{color:var(--ivory)}
+.tools{display:flex;gap:8px;align-items:center}
+.pill{font:500 12px/1 var(--mono);letter-spacing:.06em;border:1px solid var(--line);background:transparent;color:var(--ivory);padding:8px 11px;border-radius:99px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.pill[aria-pressed="true"]{border-color:var(--teal);color:var(--teal)}
+.bars{display:inline-flex;gap:2px;align-items:flex-end;height:11px}
+.bars b{width:2px;background:currentColor;height:30%;border-radius:1px}
+.pill[aria-pressed="true"] .bars b{animation:eq .9s ease-in-out infinite}
+.pill[aria-pressed="true"] .bars b:nth-child(2){animation-delay:-.3s}
+.pill[aria-pressed="true"] .bars b:nth-child(3){animation-delay:-.6s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.lang{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.lang button{font:500 11px/1 var(--mono);background:none;border:0;color:var(--mute);padding:8px 9px;cursor:pointer}
+.lang button[aria-current="true"]{background:var(--ivory);color:var(--ink)}
+.lang button:disabled{cursor:not-allowed;opacity:.55}
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:2px}
+.prog b{display:block;height:100%;width:0;background:var(--glow)}
+.chap{position:absolute;right:max(20px,env(safe-area-inset-right,0px));top:66px;font:500 11px/1 var(--mono);letter-spacing:.14em;color:var(--mute);text-transform:uppercase;background:color-mix(in srgb,var(--stage) 70%,transparent);padding:7px 10px;border-radius:99px;border:1px solid var(--line)}
+
+/* scene = tall scroll track; .pin = the sticky stage the viewer actually sees */
+.scene{position:relative}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
+.layer{grid-area:1/1;width:100%}
+.center{text-align:center;display:grid;justify-items:center;gap:26px}
+
+/* 1 · hero */
+.hero h1{font-size:clamp(52px,10.5vw,150px);font-stretch:118%}
+.hero h1 span{display:block}
+.hero .w{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.hero .w:nth-child(2){animation-delay:.08s}.hero .w:nth-child(3){animation-delay:.16s}.hero .l2{animation-delay:.28s}
+@keyframes rise{from{transform:translateY(.35em);filter:blur(10px)}to{transform:none;filter:none}}
+.lede{max-width:620px;font-size:clamp(18px,2vw,21px);color:#c4cad8}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{font:600 15px/1 var(--body);padding:15px 22px;border-radius:99px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s;display:inline-block}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--ivory);color:var(--ink)}
+.btn.ghost{border-color:var(--line);color:var(--ivory);background:color-mix(in srgb,var(--stage) 50%,transparent)}
+.loc{font:500 12px/1 var(--mono);color:var(--mute);letter-spacing:.12em;display:flex;gap:10px;align-items:center}
+.loc::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral);animation:ping 2.2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 var(--coral)}70%,100%{box-shadow:0 0 0 10px transparent}}
+.scrollcue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font:500 11px/1 var(--mono);letter-spacing:.2em;color:var(--mute);display:grid;justify-items:center;gap:10px}
+.scrollcue::after{content:"";width:1px;height:38px;background:linear-gradient(var(--mute),transparent);animation:drip 1.6s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero .after{font:800 clamp(38px,6.4vw,96px)/1 var(--display);font-stretch:115%;opacity:0}
+
+/* 2 · channels, sideways */
+.htrack{display:flex;gap:6vw;padding-inline:8vw;width:max-content;will-change:transform;align-items:center;height:100%}
+.panel{width:min(78vw,980px);display:grid;gap:22px;align-content:center;flex:none}
+.panel .huge{font:900 clamp(36px,10.5vw,168px)/.88 var(--display);font-stretch:118%;letter-spacing:-.03em;overflow-wrap:break-word;hyphens:manual}
+.panel p.copy{font-size:clamp(18px,2vw,23px);color:var(--soft);max-width:560px}
+.panel.intro h2{font-size:clamp(48px,7.4vw,112px)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font:500 12px/1 var(--mono);border:1px solid var(--line);border-radius:99px;padding:8px 11px;color:#c4cad8;background:color-mix(in srgb,var(--stage) 55%,transparent)}
+.count{font:500 13px/1 var(--mono);color:var(--mute);letter-spacing:.14em}
+
+/* 3 · AI zoom statement */
+.zword{font:900 clamp(120px,28vw,420px)/.82 var(--display);font-stretch:125%;will-change:transform}
+.zlines{display:grid;gap:6px;justify-items:center;margin-top:24px}
+.zlines p{font:700 clamp(26px,4vw,58px)/1.08 var(--display);font-stretch:110%;opacity:0;will-change:transform,opacity;text-wrap:balance;text-align:center}
+
+/* 4 · build: scroll types the skill file */
+.build{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center}
+.build h2{font-size:clamp(40px,5.6vw,80px);margin-bottom:28px}
+.items{display:grid;gap:12px}
+.item{border:1px solid var(--line);border-radius:18px;padding:18px 20px;background:var(--stage-2);backdrop-filter:blur(8px);opacity:.35;transition:opacity .4s,border-color .4s,transform .4s}
+.item.on{opacity:1;border-color:color-mix(in srgb,var(--teal) 55%,var(--line));transform:translateX(8px)}
+.item .k{font:500 11px/1 var(--mono);color:var(--teal);letter-spacing:.12em}
+.item .ib{display:block;font:700 22px/1.2 var(--display);font-stretch:108%;margin:8px 0 4px;letter-spacing:0}
+.item span{color:var(--soft);font-size:15px}
+.term{background:#04070ee6;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 40px 120px -40px #5fd6e355}
+.term .bar{display:flex;gap:7px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:center}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#2a3550}
+.term .bar span{margin-left:10px;font:500 12px/1 var(--mono);color:var(--mute)}
+.term pre{margin:0;padding:22px 24px;font:400 14px/1.75 var(--mono);color:#c4cad8;overflow-x:auto;height:20em;white-space:pre-wrap}
+.term .c{color:#5d6883}.term .y{color:var(--amber)}.term .t{color:var(--teal)}.term .o{color:var(--coral)}
+.caret{display:inline-block;width:8px;height:1.1em;background:var(--teal);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* 5 · studio reel, sideways */
+.reelhead{width:min(34vw,420px);flex:none;display:grid;gap:18px}
+.reelhead h2{font-size:clamp(40px,5.4vw,78px)}
+.reelhead p{color:var(--soft)}
+.shot{flex:none;height:min(72vh,118vw);aspect-ratio:616/720;max-width:86vw;border-radius:28px;overflow:hidden;position:relative;margin:0;border:1px solid var(--line);will-change:transform}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:60px 24px 22px;background:linear-gradient(transparent,rgba(4,7,14,.94));display:grid;gap:6px}
+.shot figcaption h3{font:800 26px/1.05 var(--display);font-stretch:110%}
+.shot figcaption span{font-size:15px;color:var(--soft)}
+.shot .no{position:absolute;top:18px;left:20px;font:500 12px/1 var(--mono);letter-spacing:.14em;color:var(--ivory);background:#04070e99;padding:7px 10px;border-radius:99px}
+
+/* 6 · products */
+.prod{display:grid;justify-items:center;gap:22px;text-align:center}
+.prod h2{font-size:clamp(44px,7vw,104px)}
+.prod .sub{color:var(--soft);font-size:clamp(17px,1.8vw,21px);max-width:620px}
+.stack{position:relative;height:min(40vh,320px);width:min(92vw,760px);margin-top:10px}
+.stack img{position:absolute;left:50%;top:0;height:100%;aspect-ratio:616/720;max-width:none;border-radius:20px;border:1px solid var(--line);object-fit:cover;transform:translateX(-50%);will-change:transform;box-shadow:0 30px 80px -30px #000}
+.feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:min(1100px,100%);text-align:left}
+.feat{border:1px solid var(--line);border-radius:18px;padding:16px 18px;background:var(--stage-2);backdrop-filter:blur(8px);opacity:0;will-change:transform,opacity}
+.feat b{display:block;font:700 18px/1.2 var(--display);font-stretch:106%;margin-bottom:4px}
+.feat span{font-size:14px;color:var(--soft)}
+.feat .ic{font:500 11px/1 var(--mono);color:var(--amber);letter-spacing:.12em;display:block;margin-bottom:10px}
+
+/* 7 · voices */
+.quote{grid-area:1/1;max-width:900px;display:grid;gap:26px;justify-items:center;text-align:center;opacity:0;will-change:opacity,transform}
+.quote blockquote{margin:0;font:700 clamp(28px,3.8vw,54px)/1.12 var(--display);font-stretch:104%;letter-spacing:-.015em;text-wrap:balance}
+.quote figcaption{font:500 13px/1.5 var(--mono);color:var(--mute);letter-spacing:.06em}
+.quote figcaption b{display:block;color:var(--ivory);font:600 17px/1.3 var(--body)}
+.qdots{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.qdots i{width:28px;height:3px;border-radius:3px;background:var(--line);overflow:hidden}
+.qdots i b{display:block;height:100%;width:0;background:var(--glow)}
+.draft{display:inline-block;margin-left:8px;font:500 10px/1 var(--mono);letter-spacing:.12em;color:var(--amber);border:1px dashed var(--amber);border-radius:99px;padding:4px 7px}
+
+/* 8 · process */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;width:100%;position:relative}
+.steps .line{position:absolute;left:0;right:0;top:40px;height:2px;background:var(--line)}
+.steps .line b{display:block;height:100%;width:0;background:var(--glow)}
+.step{display:grid;gap:12px;opacity:.3;transition:opacity .5s}
+.step.on{opacity:1}
+.step .n{font:900 80px/1 var(--display);font-stretch:122%;width:max-content;position:relative}
+.step h3{font-size:28px;font-stretch:106%}
+.step p{color:var(--soft)}
+.procHead{font-size:clamp(44px,6.6vw,96px);margin-bottom:56px}
+
+/* 9 · contact (the last frame) */
+.contact{min-height:100vh;display:grid;align-items:center;padding-block:120px 80px}
+.close{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.close h2{font-size:clamp(48px,7vw,104px)}
+.founder{display:flex;gap:16px;align-items:center;margin-top:30px}
+.founder .av{width:56px;height:56px;border-radius:50%;background:conic-gradient(from 140deg,var(--coral),var(--amber),var(--teal),var(--coral));display:grid;place-items:center;font:800 18px/1 var(--display);color:var(--ink)}
+.founder b{display:block;font-size:17px}
+.founder span{font-size:14px;color:var(--mute)}
+form{display:grid;gap:14px;background:var(--stage-2);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:26px;padding:28px}
+form label{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:grid;gap:9px}
+input,textarea{font:400 16px/1.4 var(--body);color:var(--ivory);background:#070b16cc;border:1px solid var(--line);border-radius:14px;padding:13px 14px;width:100%}
+textarea{min-height:96px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips label{text-transform:none;letter-spacing:0;font:500 14px/1 var(--body);color:var(--ivory);border:1px solid var(--line);border-radius:99px;padding:10px 14px;cursor:pointer;display:inline-block;transition:background .2s}
+.chips input:checked+label{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.chips input:focus-visible+label{outline:2px solid var(--teal);outline-offset:2px}
+.sent{font-size:15px;color:var(--teal)}
+footer{border-top:1px solid var(--line);padding-block:30px;color:var(--mute);font-size:14px;background:var(--stage)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+
+@media (max-width:900px){
+  .nav nav{display:none}
+  .tools{margin-left:auto}
+  .build,.close{grid-template-columns:minmax(0,1fr)}
+  .build{gap:22px}.build h2{margin-bottom:14px}
+  .term pre{height:11em;font-size:12.5px;padding:16px}
+  .item{padding:12px 14px}.item .ib{font-size:18px;margin:6px 0 2px}.item span{display:none}
+  .feats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:minmax(0,1fr)}.steps .line{display:none}
+  .step .n{font-size:56px}
+  .reelhead{width:78vw}
+  .panel{width:86vw}
+  .chap{display:none}
+}
+@media (max-width:440px){ .pill .lbl{display:none} .feat span{display:none} }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .scene{height:auto!important}
+  .pin{position:relative;height:auto;padding-block:90px;overflow:visible}
+  .htrack{width:auto;flex-wrap:wrap;padding-inline:20px}
+  .hero .after,.zlines p,.feat,.quote{opacity:1!important}
+  .quote{grid-area:auto}
+  .stack{display:none}
+}
+
+.lang a{font:500 11px/1 var(--mono);color:var(--mute);padding:8px 9px;text-decoration:none}
+.lang a[aria-current="page"]{background:var(--ivory);color:var(--ink)}
+h1 .h1k{display:flex;justify-content:center;gap:10px;align-items:center;font:500 12px/1.4 var(--mono);color:var(--mute);letter-spacing:.12em;text-transform:uppercase;font-stretch:100%;margin-bottom:26px}
+h1 .h1k::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--coral);animation:ping 2.2s infinite}
+.err{font-size:15px;color:var(--coral)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <div class="wrap gut">
+    <a class="brand" href="{{ home_url }}"><i></i>Lookup Price</a>
+    <nav aria-label="Sections">
+      <a href="#ads" data-for="ads">{{ t.nav.0 }}</a><a href="#ai" data-for="ai">{{ t.nav.1 }}</a><a href="#studio" data-for="studio">{{ t.nav.2 }}</a><a href="#products" data-for="products">{{ t.nav.3 }}</a><a href="#contact" data-for="contact">{{ t.nav.4 }}</a>
+    </nav>
+    <div class="tools">
+      <button class="pill" id="sound" aria-pressed="false" type="button"><span class="bars"><b></b><b></b><b></b></span><span class="lbl">{{ t.sound }}</span></button>
+      <div class="lang" role="group" aria-label="Language">
+        {% for code, url in lang_links %}<a href="{{ url }}" hreflang="{{ code }}" lang="{{ code }}"{% if code == lang %} aria-current="page"{% endif %}>{{ code|upper }}</a>{% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="prog"><b id="prog"></b></div>
+  <p class="chap" id="chap">{{ t.cities }}</p>
+</header>
+
+<main id="top">
+  <section class="scene hero" data-scene="hero" data-label="{{ t.cities }}" style="height:200vh">
+    <div class="pin gut">
+      <div class="layer wrap center" id="heroA">
+        <h1><span class="h1k">{{ t.h1_kicker|safe }}</span>{{ t.h1|safe }}</h1>
+        <p class="lede">{{ t.lede }}</p>
+        <div class="ctas">
+          <a class="btn primary" href="#contact" data-sfx="tap">{{ t.cta_primary }}</a>
+          <a class="btn ghost" href="#products" data-sfx="tap">{{ t.cta_secondary }}</a>
+        </div>
+      </div>
+      <p class="layer wrap center after" id="heroB">{{ t.hero_after|safe }}</p>
+      <p class="scrollcue" id="cue">{{ t.scroll|upper }}</p>
+    </div>
+  </section>
+
+  <section class="scene" id="ads" data-scene="ads" data-label="{{ t.ads_label }}" style="height:520vh">
+    <div class="pin">
+      <div class="htrack" id="adsTrack">
+        <div class="panel intro">
+          <p class="eyebrow">{{ t.ads_eyebrow }}</p>
+          <h2>{{ t.ads_h2|safe }}</h2>
+          <p class="copy">{{ t.ads_lede }}</p>
+        </div>
+        {% for name, copy, tags in t.channels %}
+        <div class="panel"><p class="count">0{{ forloop.counter }} / 0{{ t.channels|length }}</p><h3 class="huge glow">{{ name }}</h3><p class="copy">{{ copy }}</p><div class="tags">{% for tag in tags %}<span>{{ tag }}</span>{% endfor %}</div></div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="ai" data-scene="zoom" data-label="{{ t.ai_label }}" style="height:360vh">
+    <div class="pin gut">
+      <div class="layer center">
+        <p class="zword glow" id="zword" aria-hidden="true">AI</p>
+        <div class="zlines">
+          <p id="z1">{{ t.zoom.0 }}</p>
+          <p id="z2">{{ t.zoom.1 }}</p>
+          <p id="z3" class="glow">{{ t.zoom.2 }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="build" data-label="{{ t.ai_label }}" style="height:320vh">
+    <div class="pin gut">
+      <div class="layer wrap build">
+        <div>
+          <p class="eyebrow">{{ t.build_eyebrow|safe }}</p>
+          <h2 style="margin-top:16px">{{ t.build_h2|safe }}</h2>
+          <div class="items">
+            {% for k, title, copy in t.build_items %}<div class="item"><p class="k">{{ k }}</p><h3 class="ib">{{ title|safe }}</h3><span>{{ copy }}</span></div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="term">
+          <div class="bar"><i></i><i></i><i></i><span>skills/catalog-writer/SKILL.md</span></div>
+          <pre id="term" aria-label="Example Claude skill file"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="studio" data-scene="studio" data-label="{{ t.studio_label }}" style="height:560vh">
+    <div class="pin">
+      <div class="htrack" id="reel">
+        <div class="reelhead">
+          <p class="eyebrow">{{ t.studio_eyebrow|safe }}</p>
+          <h2>{{ t.studio_h2|safe }}</h2>
+          <p>{{ t.studio_lede }}</p>
+        </div>
+        {% for title, copy, alt, img in shots %}
+        <figure class="shot"><span class="no">0{{ forloop.counter }}</span><img src="{% static img %}" alt="{{ alt }}" width="600" height="704" decoding="async"><figcaption><h3>{{ title }}</h3><span>{{ copy }}</span></figcaption></figure>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="products" data-scene="products" data-label="{{ t.products_label }}" style="height:300vh">
+    <div class="pin gut">
+      <div class="layer wrap prod">
+        <p class="eyebrow">{{ t.products_eyebrow }}</p>
+        <h2>{{ t.products_h2|safe }}</h2>
+        <p class="sub">{{ t.products_lede }}</p>
+        <div class="stack" id="stack">
+          {% for img in stack_imgs %}<img src="{% static img %}" alt="" width="600" height="704" loading="lazy" decoding="async">{% endfor %}
+        </div>
+        <div class="feats">
+          {% for ic, title, copy in t.feats %}<div class="feat"><span class="ic">{{ ic }}</span>{% if forloop.first %}<a href="https://shoupapp.com" target="_blank" rel="noopener"><b>{{ title }}</b></a>{% else %}<b>{{ title }}</b>{% endif %}<span>{{ copy }}</span></div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="voices" data-label="{{ t.clients_label }}" style="height:520vh">
+    <div class="pin gut">
+      <div class="layer wrap" style="display:grid;place-items:center">
+        {% for quote, name, org in t.quotes %}
+        <figure class="quote"><blockquote>“{{ quote }}”</blockquote><figcaption><b>{{ name }}</b>{{ org }}</figcaption></figure>
+        {% endfor %}
+      </div>
+      <div class="qdots" id="qdots"></div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="process" data-label="{{ t.process_label }}" style="height:240vh">
+    <div class="pin gut">
+      <div class="layer wrap">
+        <p class="eyebrow">{{ t.process_label }}</p>
+        <h2 class="procHead" style="margin-top:16px">{{ t.process_h2|safe }}</h2>
+        <div class="steps">
+          <div class="line"><b id="pline"></b></div>
+          {% for title, copy in t.steps %}<div class="step"><p class="n glow">{{ forloop.counter }}</p><h3>{{ title|safe }}</h3><p>{{ copy }}</p></div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact gut" id="contact" data-scene="contact" data-label="{{ t.contact_label }}">
+    <div class="wrap close">
+      <div>
+        <p class="eyebrow">{{ t.cities }}</p>
+        <h2 style="margin-top:16px">{{ t.contact_h2|safe }}</h2>
+        <p style="margin-top:20px;color:var(--soft);max-width:460px">{{ t.contact_lede }}</p>
+        <div class="founder"><span class="av">TV</span><div><b>Kasım Tuğrul Vural</b><span>{{ t.founder_role|safe }}</span></div></div>
+      </div>
+      <form id="lead" method="post" action="{{ home_url }}#contact">
+        {% csrf_token %}
+        <div class="hp" aria-hidden="true"><label for="f-web">Website<input id="f-web" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label for="f-name">{{ t.f_name }}<input id="f-name" name="name" autocomplete="name" placeholder="{{ t.f_name_ph }}" required maxlength="250" value="{{ posted.name }}"></label>
+        <label for="f-mail">{{ t.f_email }}<input id="f-mail" name="email" type="email" autocomplete="email" placeholder="you@company.com" required maxlength="250" value="{{ posted.email }}"></label>
+        <label for="f-company">{{ t.f_company }}<input id="f-company" name="company" autocomplete="organization" placeholder="{{ t.f_company_ph }}" required maxlength="250" value="{{ posted.company }}"></label>
+        <label for="f-phone">{{ t.f_phone }}<input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="{{ t.f_phone_ph }}" required maxlength="100" value="{{ posted.phone }}"></label>
+        <fieldset style="border:0;padding:0;margin:0;display:grid;gap:9px">
+          <legend class="eyebrow" style="margin-bottom:9px">{{ t.f_need }}</legend>
+          <div class="chips">
+            {% for need in t.needs %}<input type="checkbox" id="c{{ forloop.counter }}" name="need" value="{{ need }}"><label for="c{{ forloop.counter }}" data-sfx="tick">{{ need }}</label>{% endfor %}
+          </div>
+        </fieldset>
+        <label for="f-msg">{{ t.f_msg }}<textarea id="f-msg" name="msg" placeholder="{{ t.f_msg_ph }}">{{ posted.msg }}</textarea></label>
+        <button class="btn primary" type="submit" data-sfx="tap">{{ t.f_send }}</button>
+        {% if sent %}<p class="sent" role="status">{{ t.f_sent }}</p>{% endif %}
+        {% if error %}<p class="err" role="alert">{{ t.f_error }}</p>{% endif %}
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · {{ t.cities }}</span><span>{{ t.footer_services }} · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a> · <a href="{% url 'blog' %}">Blog</a></span></div></footer>
+
+<script>
+
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v));
+  const seg = (p,a,b) => clamp((p-a)/(b-a));               // 0→1 while p moves a→b
+  const ease = t => 1-Math.pow(1-t,3);
+  const lerp = (a,b,t) => a+(b-a)*t;
+
+  /* ---------------- sound: synthesized, off until turned on ---------------- */
+  let ac=null, on=false; const sb=$('#sound');
+  const noise=d=>{const b=ac.createBuffer(1,ac.sampleRate*d,ac.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1;const s=ac.createBufferSource();s.buffer=b;return s;};
+  const sfx={
+    whoosh(){const t=ac.currentTime,n=noise(.8),f=ac.createBiquadFilter(),g=ac.createGain();f.type='bandpass';f.Q.value=1.3;f.frequency.setValueAtTime(260,t);f.frequency.exponentialRampToValueAtTime(3400,t+.34);f.frequency.exponentialRampToValueAtTime(520,t+.72);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.24,t+.2);g.gain.exponentialRampToValueAtTime(.001,t+.75);n.connect(f).connect(g).connect(ac.destination);n.start(t);n.stop(t+.8);},
+    swish(){const t=ac.currentTime,n=noise(.35),f=ac.createBiquadFilter(),g=ac.createGain();f.type='highpass';f.frequency.setValueAtTime(900,t);f.frequency.exponentialRampToValueAtTime(5200,t+.25);g.gain.setValueAtTime(.0,t);g.gain.linearRampToValueAtTime(.12,t+.06);g.gain.exponentialRampToValueAtTime(.001,t+.32);n.connect(f).connect(g).connect(ac.destination);n.start(t);n.stop(t+.35);},
+    boom(){const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(38,t+.9);g.gain.setValueAtTime(.35,t);g.gain.exponentialRampToValueAtTime(.001,t+1.1);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+1.2);},
+    tap(){const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(880,t);o.frequency.exponentialRampToValueAtTime(1320,t+.06);g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+.16);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.18);},
+    tick(){const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=1900;g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.001,t+.05);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.06);},
+    chime(){const t=ac.currentTime;[523.25,783.99,1046.5].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.setValueAtTime(0,t+i*.07);g.gain.linearRampToValueAtTime(.07,t+i*.07+.02);g.gain.exponentialRampToValueAtTime(.001,t+i*.07+.9);o.connect(g).connect(ac.destination);o.start(t+i*.07);o.stop(t+i*.07+1);});}
+  };
+  const play=k=>{ if(on&&ac) try{sfx[k]()}catch(e){} };
+  sb.addEventListener('click',()=>{ if(!ac){try{ac=new(window.AudioContext||window.webkitAudioContext)()}catch(e){return}}
+    on=!on; sb.setAttribute('aria-pressed',on); if(on){ac.resume();play('chime');} });
+  document.addEventListener('click',e=>{const el=e.target.closest('[data-sfx]'); if(el) play(el.dataset.sfx);});
+
+  /* ---------------- the sky: one canvas for the whole film ---------------- */
+  const cv=$('#sky'), c=cv.getContext('2d');
+  let W,H,P=[];
+  // look per scene; the canvas eases toward the current one
+  const LOOK={
+    hero:    {r:1.00,tilt:.28,spin:1,  mesh:0,streak:0, warm:.5,  glow:1},
+    ads:     {r:1.15,tilt:.12,spin:2.2,mesh:0,streak:1, warm:.65, glow:.9},
+    zoom:    {r:1.75,tilt:.55,spin:.6, mesh:0,streak:0, warm:.4,  glow:1.4},
+    build:   {r:.95, tilt:.30,spin:.4, mesh:1,streak:0, warm:.15, glow:.7},
+    studio:  {r:1.25,tilt:.18,spin:1.6,mesh:0,streak:.7,warm:.9,  glow:1},
+    products:{r:.70, tilt:.35,spin:1,  mesh:0,streak:0, warm:.55, glow:1.1},
+    voices:  {r:1.40,tilt:.70,spin:.3, mesh:0,streak:0, warm:.35, glow:.6},
+    process: {r:1.05,tilt:.22,spin:.8, mesh:.35,streak:0,warm:.5, glow:.8},
+    contact: {r:.42, tilt:.40,spin:1.4,mesh:0,streak:0, warm:.6,  glow:1.5}
+  };
+  const cur={...LOOK.hero}; let target=LOOK.hero, scrollV=0, lastY=scrollY, rot=0;
+  function size(){
+    const d=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight; cv.width=W*d; cv.height=H*d; c.setTransform(d,0,0,d,0,0);
+    const n=Math.round(clamp(W/5,90,300)), cols=Math.ceil(Math.sqrt(n*W/H)), rows=Math.ceil(n/cols);
+    P=Array.from({length:n},(_,i)=>({a:Math.random()*Math.PI*2,r:.5+Math.random()*.7,s:(.4+Math.random())*(Math.random()<.5?-1:1),z:Math.random(),
+      gx:((i%cols)+.5)/cols*W, gy:(Math.floor(i/cols)+.5)/rows*H, px:0, py:0}));
+  }
+  function draw(t){
+    for(const k in cur) cur[k]=lerp(cur[k],target[k],.05);
+    scrollV=lerp(scrollV,scrollY-lastY,.15); lastY=scrollY;
+    rot+=.0012*cur.spin+scrollV*.0009;
+    c.clearRect(0,0,W,H);
+    const cx=W/2, cy=H*.54, R=Math.max(W,H)*.40*cur.r;
+    c.globalCompositeOperation='lighter';
+    for(let i=0;i<3;i++){
+      const ty=cur.tilt+i*.05, rr=R*(.78+i*.14);
+      const g=c.createLinearGradient(-rr,0,rr,0), w=cur.warm;
+      g.addColorStop(0,'rgba(255,122,89,0)');
+      g.addColorStop(.3,`rgba(255,122,89,${.35+.3*w})`);
+      g.addColorStop(.55,`rgba(255,180,94,${.25+.2*w})`);
+      g.addColorStop(.8,`rgba(95,214,227,${.6-.3*w})`);
+      g.addColorStop(1,'rgba(95,214,227,0)');
+      c.save(); c.translate(cx,cy); c.rotate(rot*(i%2?-1:1)+i*1.4); c.scale(1,ty);
+      c.beginPath(); c.arc(0,0,rr,0,Math.PI*1.35); c.strokeStyle=g; c.lineWidth=1.5/ty;
+      c.shadowColor='rgba(255,140,90,.7)'; c.shadowBlur=16*cur.glow; c.stroke(); c.restore();
+    }
+    const m=ease(clamp(cur.mesh)), sv=clamp(Math.abs(scrollV)/40)*cur.streak;
+    for(const p of P){
+      p.a+=.0016*p.s*cur.spin+scrollV*.0004*p.s;
+      const ox=cx+Math.cos(p.a)*R*p.r, oy=cy+Math.sin(p.a)*R*p.r*cur.tilt*1.1;
+      const x=lerp(ox,p.gx,m), y=lerp(oy,p.gy,m);
+      const col=p.z>.5?`rgba(95,214,227,${.22+p.z*.5})`:`rgba(255,160,100,${.22+p.z*.5})`;
+      if(sv>.05){ c.strokeStyle=col; c.lineWidth=1.2; c.beginPath(); c.moveTo(x,y); c.lineTo(x-scrollV*3*p.s*sv,y); c.stroke(); }
+      else { c.fillStyle=col; c.fillRect(x,y,1.7,1.7); }
+      p.px=x; p.py=y;
+    }
+    if(m>.3){ // the mesh: link near neighbours, like the wireframe in the try-on render
+      c.strokeStyle=`rgba(95,214,227,${.12*m})`; c.lineWidth=.6; c.beginPath();
+      for(let i=0;i<P.length;i++){const a=P[i]; for(let j=i+1;j<Math.min(P.length,i+30);j++){const b=P[j],dx=a.px-b.px,dy=a.py-b.py; if(dx*dx+dy*dy<9000){c.moveTo(a.px,a.py);c.lineTo(b.px,b.py);}}}
+      c.stroke();
+    }
+    c.globalCompositeOperation='source-over';
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize',size); requestAnimationFrame(draw);
+
+  /* ---------------- scenes ---------------- */
+  const scenes=$$('[data-scene]'); const prog=$('#prog'), chap=$('#chap'); let active=null;
+  const term=$('#term');
+  $('#qdots').innerHTML=$$('.quote').map(()=>'<i><b></b></i>').join('');
+  const TL=[['c','---\n'],['y','name: '],['t','catalog-writer\n'],['y','description: '],['t','Writes product titles, bullets and SEO copy from a photo and the store feed.\n'],['c','---\n\n'],
+    ['o','# When to use\n'],['','A new product lands in Shopify without copy.\n\n'],['o','# Steps\n'],
+    ['','1. Read the feed row and the main photo.\n'],['','2. Draft title, five bullets, meta description.\n'],['','3. Publish as a draft for review.\n\n'],
+    ['o','# Tools\n'],['t','shopify.products.update  '],['c','# draft only']];
+  const TLEN=TL.reduce((n,[,s])=>n+s.length,0);
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  function typeTo(n){ let out='',k=0; for(const [cl,s] of TL){ const take=clamp(n-k,0,s.length); k+=s.length; if(!take) break; const t=esc(s.slice(0,take)); out+=cl?`<span class="${cl}">${t}</span>`:t; }
+    term.innerHTML=out+(n<TLEN?'<span class="caret"></span>':''); }
+  let lastPanel={};
+
+  const RUN={
+    hero(p){ const a=seg(p,.18,.5), b=seg(p,.42,.72), b2=seg(p,.85,1);
+      $('#heroA').style.cssText=`opacity:${1-a};transform:scale(${1-.12*a}) translateY(${-40*a}px);filter:blur(${a*8}px)`;
+      $('#heroB').style.cssText=`opacity:${b*(1-b2)};transform:scale(${.9+.1*ease(b)+.3*b2})`;
+      $('#cue').style.opacity=1-seg(p,0,.08); },
+    h(sec,track,p){ const max=track.scrollWidth-innerWidth; track.style.transform=`translate3d(${-max*ease(p*0.999)}px,0,0)`;
+      const kids=[...track.children], idx=Math.round(p*(kids.length-1));
+      if(lastPanel[sec.id]!==idx){ lastPanel[sec.id]=idx; play('swish'); }
+      return kids; },
+    ads(p,sec){ const kids=RUN.h(sec,$('#adsTrack'),p); const mid=innerWidth/2;
+      kids.forEach(k=>{const r=k.getBoundingClientRect(), d=clamp(Math.abs(r.left+r.width/2-mid)/innerWidth); k.style.opacity=1-d*1.1; k.style.transform=`scale(${1-d*.12})`;}); },
+    zoom(p){ const s=ease(seg(p,0,.35));
+      $('#zword').style.transform=`scale(${lerp(3.2,1,s)})`;
+      [['#z1',.32,.46],['#z2',.46,.6],['#z3',.6,.74]].forEach(([id,a,b])=>{const q=ease(seg(p,a,b)); const el=$(id); el.style.opacity=q*(1-seg(p,.9,1)); el.style.transform=`translateY(${(1-q)*40}px)`;});
+      $('#zword').style.opacity=1-seg(p,.9,1); },
+    build(p){ typeTo(Math.round(TLEN*seg(p,.05,.85))); const i=Math.min(2,Math.floor(seg(p,.05,.95)*3));
+      $$('.item').forEach((el,k)=>el.classList.toggle('on',k===i)); },
+    studio(p,sec){ const kids=RUN.h(sec,$('#reel'),p); const mid=innerWidth/2;
+      kids.forEach(k=>{ if(!k.classList.contains('shot')) return; const r=k.getBoundingClientRect(), d=(r.left+r.width/2-mid)/innerWidth;
+        k.style.transform=`perspective(1200px) rotateY(${clamp(d,-1,1)*-18}deg) scale(${1-Math.min(.14,Math.abs(d)*.18)})`;
+        k.querySelector('img').style.transform=`translateX(${d*-14}%) scale(1.3)`; }); },
+    products(p){ const imgs=$$('#stack img'), s=ease(seg(p,.12,.55)), n=imgs.length, w=$('#stack').clientWidth;
+      imgs.forEach((im,i)=>{ const off=(i-(n-1)/2); const spread=Math.min(w/n*1.05, 170);
+        im.style.transform=`translateX(-50%) translateX(${off*spread*s}px) rotate(${off*(8-8*s)+off*3*s}deg) translateY(${Math.abs(off)*14*s}px)`; im.style.zIndex=10-Math.abs(Math.round(off)); });
+      $$('.feat').forEach((f,i)=>{const q=ease(seg(p,.55+i*.08,.7+i*.08)); f.style.opacity=q; f.style.transform=`translateY(${(1-q)*30}px)`;}); },
+    voices(p){ const qs=$$('.quote'), dots=$$('.qdots b');
+      const n=qs.length;
+      qs.forEach((q,i)=>{ const a=i/n, b=(i+1)/n, inn=i===0?1:seg(p,a,a+.05), out=i===n-1?0:seg(p,b-.04,b);
+        q.style.opacity=inn*(1-out); q.style.transform=`translateY(${(1-inn)*40-out*40}px)`; dots[i].style.width=seg(p,a,b)*100+'%'; }); },
+    process(p){ const q=seg(p,.05,.85); $('#pline').style.width=q*100+'%'; $$('.step').forEach((s,i)=>s.classList.toggle('on',q>=i/3+.01)); },
+    contact(){}
+  };
+
+  function onScroll(){
+    const doc=document.documentElement; prog.style.width=(scrollY/(doc.scrollHeight-innerHeight)*100)+'%';
+    let now=null;
+    for(const sec of scenes){
+      const r=sec.getBoundingClientRect(), name=sec.dataset.scene;
+      if(r.top<=innerHeight*.5 && r.bottom>innerHeight*.5) now=sec;
+      if(reduce || r.bottom<-innerHeight || r.top>innerHeight*2) continue;
+      const span=Math.max(1,r.height-innerHeight), p=clamp(-r.top/span);
+      RUN[name](p,sec);
+    }
+    if(now && now!==active){ active=now; target=LOOK[now.dataset.scene]; chap.textContent=now.dataset.label;
+      play(now.dataset.scene==='zoom'?'boom':'whoosh');
+      const id=now.id||''; $$('.nav nav a').forEach(a=>a.classList.toggle('cur',a.dataset.for===id)); }
+  }
+  let ticking=false;
+  addEventListener('scroll',()=>{ if(!ticking){ticking=true;requestAnimationFrame(()=>{ticking=false;onScroll();});} },{passive:true});
+  addEventListener('resize',onScroll);
+  if(reduce) typeTo(TLEN);
+  onScroll();
+
+})();
+
+</script>
+</body>
+</html>

@@ -4,18 +4,59 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from lookupAgencyApp.forms import ContactForm
 from lookupAgencyApp.models import Post, Tags, StaticPages
+from lookupAgencyApp.home_content import CONTENT
+import json
 
 
 # Create your views here.
 
-def index(request, *args, **kwargs):
-    blogs = Post.objects.filter(is_published=True, types='blog')[0:3]
-    cases = Post.objects.filter(is_published=True, types='case')[0:3]
-    context = {
-        'blogs': blogs,
-        'cases': cases
+BASE_URL = 'https://www.lookupprice.com'
+HOME_URLS = {'en': '/', 'es': '/es/', 'tr': '/tr/'}
+SHOT_IMGS = ['tryon', 'turntable', 'film', 'banner', 'living', 'scene']
+
+
+def index(request, lang='en'):
+    t = CONTENT[lang]
+    home_url = HOME_URLS[lang]
+    posted, error = {}, False
+    if request.method == 'POST':
+        posted = {k: request.POST.get(k, '').strip() for k in ('name', 'email', 'company', 'phone', 'msg')}
+        if request.POST.get('website'):  # honeypot: bots fill every field
+            return redirect(home_url + '?sent=1#contact')
+        needs = request.POST.getlist('need')
+        content = (('Needs: ' + ', '.join(needs) + '\n\n') if needs else '') + posted['msg']
+        form = ContactForm({**posted, 'content': content or '-'})
+        if form.is_valid():
+            form.save()
+            return redirect(home_url + '?sent=1#contact')
+        error = True
+    schema = {
+        '@context': 'https://schema.org',
+        '@type': 'ProfessionalService',
+        'name': 'Lookup Price',
+        'url': BASE_URL + '/',
+        'image': BASE_URL + '/static/home/og.jpg',
+        'logo': BASE_URL + '/static/logos/mylogo.png',
+        'description': t['description'],
+        'founder': {'@type': 'Person', 'name': 'Kasım Tuğrul Vural'},
+        'address': {'@type': 'PostalAddress', 'addressLocality': 'Barcelona', 'addressCountry': 'ES'},
+        'areaServed': ['ES', 'TR', 'FR', 'EU'],
+        'knowsLanguage': ['en', 'es', 'tr'],
+        'knowsAbout': ['Google Ads', 'Meta Ads', 'ChatGPT ads', 'AI model deployment',
+                       'Claude and OpenAI plugins', 'Product video production', 'Product photography', 'Shopify apps'],
+        'sameAs': ['https://shoupapp.com'],
     }
-    return render(request, 'index.html', context)
+    context = {
+        't': t, 'lang': lang, 'home_url': home_url,
+        'base_url': BASE_URL, 'canonical': BASE_URL + home_url,
+        'alternates': [(code, BASE_URL + url) for code, url in HOME_URLS.items()],
+        'lang_links': list(HOME_URLS.items()),
+        'shots': [(*shot, 'home/%s.webp' % img) for shot, img in zip(t['shots'], SHOT_IMGS)],
+        'stack_imgs': ['home/%s.webp' % i for i in ('tryon', 'turntable', 'film', 'banner', 'scene')],
+        'schema': json.dumps(schema, ensure_ascii=False).replace('</', '<\\/'),
+        'posted': posted, 'error': error, 'sent': request.GET.get('sent') == '1',
+    }
+    return render(request, 'home.html', context)
 
 
 def contact(request, *args, **kwargs):
