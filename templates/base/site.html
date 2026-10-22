@@ -135,13 +135,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
       <a class="opt" href="{% url 'index' %}#ai">AI</a>
       <a class="opt" href="{% url 'index' %}#studio">Studio</a>
       <a href="{% url 'blog' %}"{% if section == 'blog' %} aria-current="page"{% endif %}>Blog</a>
-      <a href="{% url 'case' %}"{% if section == 'case' %} aria-current="page"{% endif %}>Cases</a>
     </nav>
     <a class="btn" href="{% url 'index' %}#contact">Start a project</a>
   </div>
 </header>
 <main>{% block content %}{% endblock %}</main>
-<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · Barcelona · Istanbul · Paris</span><span><a href="{% url 'blog' %}">Blog</a> · <a href="{% url 'case' %}">Cases</a> · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a> · <a href="/privacy-policy/">Privacy</a></span></div></footer>
+<footer><div class="wrap gut"><span>© {% now "Y" %} Lookup Price · Barcelona · Istanbul · Paris</span><span><a href="{% url 'blog' %}">Blog</a> · <a href="https://shoupapp.com" target="_blank" rel="noopener">Shoupapp</a></span></div></footer>
 <script>
 (() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
